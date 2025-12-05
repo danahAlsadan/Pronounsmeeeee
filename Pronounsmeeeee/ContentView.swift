@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        RecorderView()  
+        d()  
     }
 }
 
 #Preview {
-    RecorderView()
+    d()
 }
