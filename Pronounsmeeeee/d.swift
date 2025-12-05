@@ -51,7 +51,7 @@ struct MenuView: View {
         "ل": (["لِ", "لُ", "لَ"], "68AEYM9H8Nw"),
         "م": (["مِ", "مُ", "مَ"], "a1YTd2ZHKI8"),
         "ن": (["نِ", "نُ", "نَ"], "Z-bHV5EuzUE"),
-        "هـ": (["هِ", "هُ", "هَ"], "M9n3qsQW_CQ"),
+        "هـ": (["هِـ", "هُـ", "هَـ"], "M9n3qsQW_CQ"),
         "و": (["وِ", "وُ", "وَ"], "9ytJLcRGzpc"),
         "ي": (["يِ", "يُ", "يَ"], "oG-ZOdqsctY")
     ]
@@ -69,10 +69,10 @@ struct MenuView: View {
                 HStack(spacing: 12) {
                     ZStack {
                         Circle()
-                            .stroke(Color(red: 0.20, green: 0.50, blue: 0.90), lineWidth: 6)
-                            .frame(width: 60, height: 60)
+           .stroke(Color(red: 0.20, green: 0.50, blue: 0.90), lineWidth: 6)
+            .frame(width: 60, height: 60)
 
-                        Image(systemName: "person.fill")
+      Image(systemName: "person.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 32, height: 32)
@@ -104,6 +104,7 @@ struct MenuView: View {
                                 } label: {
                                     Image(imageName)
                                         .resizable()
+
                                         .frame(width: 269, height: 103)
                                         .clipped()
                                 }
