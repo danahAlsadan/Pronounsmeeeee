@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FED5F1102EE2C18E00574F2D /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FED5F10F2EE2C18E00574F2D /* ConfettiSwiftUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		F3F660C62EE1D4F900166E6B /* Pronounsmeeeee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pronounsmeeeee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FED5F1102EE2C18E00574F2D /* ConfettiSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = Pronounsmeeeee;
 			packageProductDependencies = (
+				FED5F10F2EE2C18E00574F2D /* ConfettiSwiftUI */,
 			);
 			productName = Pronounsmeeeee;
 			productReference = F3F660C62EE1D4F900166E6B /* Pronounsmeeeee.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = F3F660BD2EE1D4F900166E6B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				FED5F10E2EE2C18E00574F2D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F3F660C72EE1D4F900166E6B /* Products */;
 			projectDirPath = "";
@@ -253,9 +262,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L5Q88TJ2ZV;
+				DEVELOPMENT_TEAM = U2S964YRSC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "نحتاج إذن لاستخدام المايك لتسجيل الصوت.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "نحتاج إذن التعرف على الكلام .";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -266,7 +277,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.danah1.Pronounsmeeeee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wed.Pronounsmeeeee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -285,9 +296,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L5Q88TJ2ZV;
+				DEVELOPMENT_TEAM = U2S964YRSC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "نحتاج إذن لاستخدام المايك لتسجيل الصوت.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "نحتاج إذن التعرف على الكلام .";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -298,7 +311,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.danah1.Pronounsmeeeee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wed.Pronounsmeeeee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -332,6 +345,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FED5F10E2EE2C18E00574F2D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FED5F10F2EE2C18E00574F2D /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FED5F10E2EE2C18E00574F2D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F3F660BE2EE1D4F900166E6B /* Project object */;
 }
