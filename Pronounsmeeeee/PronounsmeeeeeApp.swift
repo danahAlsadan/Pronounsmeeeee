@@ -11,7 +11,7 @@ import SwiftUI
 struct PronounsmeeeeeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            d()
         }
     }
 }
