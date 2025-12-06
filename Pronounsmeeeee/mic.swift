@@ -4,14 +4,17 @@ import ConfettiSwiftUI
 struct RecorderView: View {
     @StateObject var recognizer = SpeechRecognizer()
     let db = SQLiteManager()
-    
-    @State private var sentences = [
-        "ذهب أحمد إلى الحديقة",
-        "لعب خالد بالكرة",
-        "ذهبت مريم إلى المدرسة",
-        "ركب سالم الدراجة"
+
+    @State var sentences: [String]
+
+    // جمل الحروف
+    let letterSentences: [String: [String]] = [
+        "أ": ["أرنب", "أسد", "أذن"],
+        "ب": ["باب", "برتقال", "بطة"],
+        "ت": ["تمر", "تفاحة", "توت"],
+        // كملي بقية الحروف بنفس الشكل...
     ]
-    
+
     @State private var currentIndex = 0
     @State private var confettiCounter = 0
     @State private var isRecording = false
@@ -101,7 +104,12 @@ struct RecorderView: View {
     func toggleRecording() {
         if isRecording {
             recognizer.stop()
-            checkWord()
+//            checkWord()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                checkWord()
+            }
+
         } else {
             recognizer.start()
         }
@@ -109,14 +117,41 @@ struct RecorderView: View {
     }
     
     // التحقق من الكلمة
+//    func checkWord() {
+//        let spoken = recognizer.transcript.trimmingCharacters(in: .whitespaces)
+//        
+//        if spoken.contains(targetWord) {
+//            resultMessage = "😁"
+//            db.insert(word: targetWord, correct: true)
+//            showNextButton = false
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                showNextButton = true
+//            }
+//        } else {
+//            resultMessage = "😕"
+//            db.insert(word: targetWord, correct: false)
+//        }
+//    }
+    
+    
+    func normalize(_ text: String) -> String {
+        return text
+            .applyingTransform(.stripCombiningMarks, reverse: false)?
+            .replacingOccurrences(of: "‌", with: "") // remove invisible
+            .replacingOccurrences(of: " ", with: "") // remove spaces
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .lowercased() ?? text.lowercased()
+    }
+//
     func checkWord() {
-        let spoken = recognizer.transcript.trimmingCharacters(in: .whitespaces)
-        
-        if spoken.contains(targetWord) {
+        let spoken = normalize(recognizer.transcript)
+        let target = normalize(targetWord)
+
+        if spoken.contains(target) {
             resultMessage = "😁"
             db.insert(word: targetWord, correct: true)
             showNextButton = false
-            
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 showNextButton = true
             }
@@ -125,6 +160,10 @@ struct RecorderView: View {
             db.insert(word: targetWord, correct: false)
         }
     }
+    
+
+
+
     
     // الانتقال للجملة التالية
     func nextSentence() {
@@ -162,6 +201,9 @@ extension Color {
     }
 }
 
+
 #Preview {
-    RecorderView()
+    RecorderView(sentences: ["باب", "برتقال", "بطة"])
 }
+
+

@@ -89,22 +89,24 @@ struct LetterVideoScreen: View {
                     }
                 }
                 .buttonStyle(.plain)
-//                
-//                NavigationLink {
-//                    RecorderView()
-//                        } label: {
-//                            Text("التمارين")
-//                                .font(.title2)
-//                                .foregroundColor(.white)
-//                                .padding()
-//                                .frame(width: 220)
-//                                .background(Color(hex: "f6b922"))
-//                                .cornerRadius(20)
-//                                .offset(y: 110)
-//
-//                        }
-//                .buttonStyle(.plain)
-//                .shadow(radius: 2)
+               
+            
+//wed    button to go to the next page mic
+                NavigationLink {
+                    RecorderView(sentences: sentences)
+                        } label: {
+                            Text("التمارين")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(width: 220)
+                                .background(Color(hex: "f6b922"))
+                                .cornerRadius(20)
+                                .offset(y: 110)
+
+                        }
+                .buttonStyle(.plain)
+                .shadow(radius: 2)
 ////                
 
 //دانه الزر خليته كوميت لانه اذا اضفته الخلفيه تنزل تحت شوي   بشوف سالفتها  بعدين 
