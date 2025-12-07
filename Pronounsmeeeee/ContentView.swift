@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationStack {
-            JarEntryButton()
+            AnimalQuizView()
                 .navigationTitle("الرئيسية")
         }
     }
@@ -18,6 +18,6 @@ struct ContentView: View {
 
 #Preview {
     NavigationStack {
-        JarEntryButton()
+        AnimalQuizView()
     }
 }
