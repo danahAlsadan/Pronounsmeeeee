@@ -90,10 +90,27 @@ struct RecorderView: View {
              
                 
                 // زر التالي
+//                if showNextButton {
+//                    Button(action: { nextSentence() })
+//                    {
+//                        Text("التالي")
+//                            .font(.title2)
+//                            .foregroundColor(.white)
+//                            .frame(width: 195, height: 42)
+//                            .background(Color(hex: "f6b922"))
+//                            .cornerRadius(25)
+//                    }
+//                }
+//
                 if showNextButton {
-                    Button(action: { nextSentence() })
-                    {
-                        Text("التالي")
+                    Button(action: {
+                        if currentIndex == sentences.count - 1 {
+                            goToStory  = true   // ← يروح للصفحة الثانية
+                        } else {
+                            nextSentence()
+                        }
+                    }) {
+                        Text(currentIndex == sentences.count - 1 ? "إنهاء" : "التالي")
                             .font(.title2)
                             .foregroundColor(.white)
                             .frame(width: 195, height: 42)
@@ -101,7 +118,7 @@ struct RecorderView: View {
                             .cornerRadius(25)
                     }
                 }
-                
+
                 Spacer()
             }
             .padding(.bottom, 30)
@@ -185,9 +202,9 @@ struct RecorderView: View {
             isRecording = false
         } else {
 //            resultMessage = "👏 خلصت كل الجمل!"
-            showNextButton = false
+//            showNextButton = false
             confettiCounter += 1
-        }
+            showNextButton = true         }
     }
 }
 
