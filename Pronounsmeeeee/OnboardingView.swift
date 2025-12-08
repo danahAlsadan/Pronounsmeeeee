@@ -60,7 +60,7 @@ struct OnboardingView: View {
                     // مسافة إضافية عشان ننزل الشخصيات والنجوم
                     Spacer().frame(height: 70)
                     
-                    // MARK: - Boy / Girl with stars
+                    // MARK: - Boy / Girl with stars (منزّلة تحت شوي)
                     HStack(spacing: 45) {
                         genderColumn(type: .boy)
                         genderColumn(type: .girl)
@@ -96,15 +96,16 @@ struct OnboardingView: View {
                             EmptyView()
                         }
                         .hidden()
+                        
                     } else {
                         Spacer().frame(height: 40)
                     }
                 }
                 .padding(.horizontal, 24)
             }
+            // 👇 هذا اللي يخلي الهيدر ثابت وما يطلع مع الكيبورد
+            .ignoresSafeArea(.keyboard, edges: .bottom)
         }
-        // 👈 هنا المهم: نخلي الـ NavigationView يتجاهل الكيبورد من الأسفل
-        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
     // MARK: - عمود ولد/بنت (الصورة + النجمة الزر)
