@@ -103,8 +103,10 @@ struct OnboardingView: View {
                 }
                 .padding(.horizontal, 24)
             }
-            // 👇 هذا اللي يخلي الهيدر ثابت وما يطلع مع الكيبورد
-            .ignoresSafeArea(.keyboard, edges: .bottom)
+            // iOS 16+ navigation API: present HomePage when navigateToHome becomes true
+            .navigationDestination(isPresented: $navigateToHome) {
+                HomePage(childName: childName, profileImage: "")
+            }
         }
     }
     
