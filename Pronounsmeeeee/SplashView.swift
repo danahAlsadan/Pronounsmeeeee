@@ -55,7 +55,7 @@ struct SplashView: View {
         }
         
         // 4) بعد 2.7 ثانية نطلع من السبلاش (تقدرين تغيرين الوقت)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.7) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             withAnimation {
                 showSplash = false
             }
