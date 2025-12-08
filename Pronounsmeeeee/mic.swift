@@ -5,6 +5,8 @@ struct RecorderView: View {
     @StateObject var recognizer = SpeechRecognizer()
     let db = SQLiteManager()
 
+    @State private var goToStory = false
+
     @State var sentences: [String]
 
     // جمل الحروف
@@ -34,6 +36,14 @@ struct RecorderView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
+            NavigationLink(
+                destination: AnimalQuizView(), // ← غيريها لصفحتك
+                isActive: $goToStory
+            ) {
+                EmptyView()
+            }
+            .hidden()
+
             VStack(spacing: 40) {
                 
                 Spacer()

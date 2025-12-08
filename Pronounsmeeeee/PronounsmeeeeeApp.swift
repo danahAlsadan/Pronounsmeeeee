@@ -11,8 +11,12 @@ import SwiftUI
 struct PronounsmeeeeeApp: App {
     var body: some Scene {
         WindowGroup {
-            d()
+            RootView()   //RootView
         }
     }
 }
 /// dont  put any thing here plz
+
+#Preview {
+    RootView()
+}
