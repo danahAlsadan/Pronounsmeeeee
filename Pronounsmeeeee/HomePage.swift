@@ -46,11 +46,11 @@ struct HomePage: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("مرحباً")
                             .font(.system(size: 22, weight: .medium))
-                            .foregroundColor(.orange)
-                        
+                            .foregroundColor(Color(hex: "EE822B"))
+
                         Text(childName)
                             .font(.system(size: 32, weight: .bold))
-                            .foregroundColor(.blue)
+                            .foregroundColor(.gray)
                     }
                     
                     Spacer()
@@ -81,10 +81,10 @@ struct HomePage: View {
                 } label: {
                     ZStack {
                         // النجمة الرئيسية - أكبر
-                        Image(systemName: "star.fill")
+                        Image( "Star")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 220, height: 220)
+                            .frame(width: 260, height: 260)
                             .foregroundColor(.yellow)
                             .shadow(color: .yellow.opacity(0.5), radius: 20)
                             .scaleEffect(starScale)
@@ -93,7 +93,7 @@ struct HomePage: View {
                         Text("ابدأ\nالتمارين")
                             .font(.system(size: 28, weight: .bold))
                             .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(hex: "EE822B"))
                     }
                 }
                 
@@ -101,10 +101,10 @@ struct HomePage: View {
                 
                 // رسالة تحفيزية - لون أبيض
                 VStack(spacing: 8) {
-                    Text("🌟")
+                    Text("")
                         .font(.system(size: 40))
                     
-                    Text("استعد لمغامرة تعلم رائعة!")
+                    Text("")
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.white)
                 }

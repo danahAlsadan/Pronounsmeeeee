@@ -5,7 +5,8 @@ struct OnboardingView: View {
     @State private var selectedGender: Gender? = nil
     
     private let accentColor = Color(hex: "#EE822B")
-    
+    @State private var navigateToHome: Bool = false
+
     // يظهر زر Let’s Practice لما الاسم مو فاضي + اختيار الجنس
     private var canProceed: Bool {
         !childName.trimmingCharacters(in: .whitespaces).isEmpty &&
@@ -13,83 +14,94 @@ struct OnboardingView: View {
     }
     
     var body: some View {
-        ZStack {
-            // خلفية زرقاء من الصورة
-            Image("SplashBackRound")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
-            
-            VStack(spacing: 24) {
+        NavigationView {
+            ZStack {
+                // خلفية زرقاء من الصورة
+                Image("SplashBackRound")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
                 
-                // MARK: - Hello + Name (متمركزة بالكامل)
-                VStack(spacing: 6) {
-
-                    HStack(spacing: 15) {
-                        Text("Hello")
-                            .font(.system(size: 35, weight: .bold))
-                            .italic()
-                            .foregroundColor(accentColor)
-
-                        TextField("", text: $childName)
-                            .font(.system(size: 35, weight: .semibold))
-                            .italic()
-                            .foregroundColor(accentColor.opacity(0.85))
-                            .multilineTextAlignment(.center)
-                            .placeholder(when: childName.isEmpty) {
-                                Text("Name")
-                                    .font(.system(size: 35, weight: .semibold))
-                                    .italic()
-                                    .foregroundColor(accentColor.opacity(0.35))
-                            }
-                            .frame(maxWidth: 100)  // يمنع التمدد لليمين ويسار
+                VStack(spacing: 24) {
+                    
+                    // MARK: - Hello + Name (متمركزة بالكامل)
+                    VStack(spacing: 6) {
+                        
+                        HStack(spacing: 15) {
+                            Text("Hello")
+                                .font(.system(size: 35, weight: .bold))
+                                .italic()
+                                .foregroundColor(accentColor)
+                            
+                            TextField("", text: $childName)
+                                .font(.system(size: 35, weight: .semibold))
+                                .italic()
+                                .foregroundColor(accentColor.opacity(0.85))
+                                .multilineTextAlignment(.center)
+                                .placeholder(when: childName.isEmpty) {
+                                    Text("Name")
+                                        .font(.system(size: 35, weight: .semibold))
+                                        .italic()
+                                        .foregroundColor(accentColor.opacity(0.35))
+                                }
+                                .frame(maxWidth: 100)  // يمنع التمدد لليمين ويسار
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center)   // أهم سطر
+                        .padding(.horizontal)
+                        
+                        Rectangle()
+                            .fill(accentColor.opacity(0.4))
+                            .frame(width: 250, height: 3)
+                            .frame(maxWidth: .infinity, alignment: .center)
                     }
-                    .frame(maxWidth: .infinity, alignment: .center)   // أهم سطر
-                    .padding(.horizontal)
-
-                    Rectangle()
-                        .fill(accentColor.opacity(0.4))
-                        .frame(width: 250, height: 3)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.top, 30)
-                
-                // مسافة إضافية عشان ننزل الشخصيات والنجوم
-                Spacer().frame(height: 70)
-                
-                // MARK: - Boy / Girl with stars (منزّلة تحت شوي)
-                HStack(spacing: 45) {
-                    genderColumn(type: .boy)
-                    genderColumn(type: .girl)
-                }
-                .padding(.top, 50)
-                
-                Spacer()
-                
-                // MARK: - Let’s Practice button
-                if canProceed {
-                    Button {
-                        // TODO: الانتقال للصفحة اللي بعدها
-                    } label: {
-                        Text("Let’s Practice")
-                            .font(.system(size: 26, weight: .bold))
-                            .foregroundColor(accentColor)
-                            .padding(.horizontal, 50)
-                            .padding(.vertical, 14)
-                            .background(
-                                Capsule()
-                                    .fill(Color.yellow.opacity(0.9))
-                                    .shadow(radius: 4, y: 3)
-                            )
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.top, 30)
+                    
+                    // مسافة إضافية عشان ننزل الشخصيات والنجوم
+                    Spacer().frame(height: 70)
+                    
+                    // MARK: - Boy / Girl with stars (منزّلة تحت شوي)
+                    HStack(spacing: 45) {
+                        genderColumn(type: .boy)
+                        genderColumn(type: .girl)
                     }
-                    .padding(.bottom, 40)
-                    .transition(.opacity.combined(with: .move(edge: .bottom)))
-                } else {
-                    Spacer().frame(height: 40)
+                    .padding(.top, 50)
+                    
+                    Spacer()
+                    
+                    // MARK: - Let’s Practice button
+                    if canProceed {
+                        Button {
+                            navigateToHome = true
+                        } label: {
+                            Text("Let’s Practice")
+                                .font(.system(size: 26, weight: .bold))
+                                .foregroundColor(accentColor)
+                                .padding(.horizontal, 50)
+                                .padding(.vertical, 14)
+                                .background(
+                                    Capsule()
+                                        .fill(Color.yellow.opacity(0.9))
+                                        .shadow(radius: 4, y: 3)
+                                )
+                        }
+                        .padding(.bottom, 40)
+                        .transition(.opacity.combined(with: .move(edge: .bottom)))
+                        // رابط الانتقال للصفحة
+                        NavigationLink(
+                            destination: HomePage(childName: childName, profileImage: ""),
+                            isActive: $navigateToHome
+                        ) {
+                            EmptyView()
+                        }
+                        .hidden()
+
+                    } else {
+                        Spacer().frame(height: 40)
+                    }
                 }
+                .padding(.horizontal, 24)
             }
-            .padding(.horizontal, 24)
         }
     }
     
@@ -153,6 +165,6 @@ extension View {
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingView()
-            .previewDevice("iPhone 17 Pro")   // اختياري: نوع الجهاز في الكانفاس
+//            .previewDevice("iPhone 17 Pro")   // اختياري: نوع الجهاز في الكانفاس
     }
 }
