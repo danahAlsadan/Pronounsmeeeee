@@ -230,8 +230,10 @@ private let allStories: [String: StoryItem] = [
 ]
 
 struct AnimalQuizView: View {
-    // نقرأ الحرف المختار من d عبر AppStorage، ونبقي إمكانية تمريره عبر init كما هي
+    // نقرأ الحرف المختار من d عبر AppStorage (UserDefaults)
     @AppStorage("selectedLetter") private var storedLetter: String = "أ"
+
+    // نحافظ على توقيع المهيّئ كما هو لدعم الاستدعاءات الحالية
     let letter: String
 
     @State private var isCorrect = false
@@ -241,25 +243,26 @@ struct AnimalQuizView: View {
 
     init(letter: String = "أ") {
         self.letter = letter
-        // إن وُجد حرف مخزّن من d نستخدمه، وإلا نستخدم قيمة init الافتراضية
-        if letter != storedLetter {
-            // إذا تم تمرير حرف صريح مختلف، نخزّنه ليُستخدم تلقائياً
+        // إن تم تمرير حرف صريح، نخزّنه ليكون المصدر الموحد
+        if !letter.isEmpty {
             UserDefaults.standard.set(letter, forKey: "selectedLetter")
         }
     }
 
+    // الحرف الفعلي المعروض: المفضل هو المخزّن من d، وإلا الحرف الممرر
     private var effectiveLetter: String {
-        // يفضّل المخزّن إن وجد، وإلا الحرف الممرر
         let saved = UserDefaults.standard.string(forKey: "selectedLetter") ?? letter
         return allStories.keys.contains(saved) ? saved : letter
     }
 
+    // العنصر الحالي من قاعدة البيانات المخصصة
     private var item: StoryItem? {
         allStories[effectiveLetter]
     }
 
     var body: some View {
         ZStack(alignment: .top) {
+            // الخلفية
             Image("خلفيتي")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -267,6 +270,8 @@ struct AnimalQuizView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
+
+                // NavigationLink مخفي للانتقال للبرطمان
                 NavigationLink(
                     "",
                     destination: StarJarView(justEarnedStar: true),
@@ -276,7 +281,9 @@ struct AnimalQuizView: View {
 
                 Spacer(minLength: 0)
 
+                // بطاقة القصة + الحروف الأولى الملونة + الصورة
                 VStack(spacing: 0) {
+                    // نص القصة
                     VStack(spacing: 0) {
                         Text(item?.storyLine ?? "أحمد ذهب إلى الحديقة ورأى")
                             .multilineTextAlignment(.center)
@@ -289,6 +296,7 @@ struct AnimalQuizView: View {
                     }
                     .padding(.top, 2)
 
+                    // الحروف الأولى الملوّنة (من الخيارات الحالية)
                     HStack(spacing: 20) {
                         ForEach((item?.options ?? []), id: \.self) { word in
                             let first = String(word.prefix(1))
@@ -304,6 +312,7 @@ struct AnimalQuizView: View {
                     }
                     .padding(.horizontal, 12)
 
+                    // صورة الحيوان (اسمها = imageName)
                     if let imageName = item?.imageName {
                         Image(imageName)
                             .resizable()
@@ -332,6 +341,7 @@ struct AnimalQuizView: View {
                 .shadow(color: .white.opacity(0.2), radius: 2, x: -1, y: -1)
                 .padding(.horizontal, 30)
 
+                // أزرار الخيارات
                 HStack(spacing: 12) {
                     ForEach((item?.options ?? []), id: \.self) { option in
                         liquidGlassButton(title: option) {
@@ -354,6 +364,7 @@ struct AnimalQuizView: View {
         }
     }
 
+    // MARK: - Actions
     private func handleSelection(option: String) {
         selectedOption = option
         if option == item?.correctOption {
@@ -364,6 +375,7 @@ struct AnimalQuizView: View {
         }
     }
 
+    // MARK: - Components
     @ViewBuilder
     private func liquidGlassButton(title: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
@@ -383,11 +395,13 @@ struct AnimalQuizView: View {
                         .stroke(Color(hex: "F3BB34"))
                 )
         }
+        // بعد اختيار الصحيح، نوقف الأزرار الأخرى
         .disabled(isCorrect && title != item?.correctOption)
     }
 }
 
 #Preview {
+    // جرّبي تغيير الحرف في المعاينة
     NavigationStack {
         AnimalQuizView(letter: "ث")
     }
