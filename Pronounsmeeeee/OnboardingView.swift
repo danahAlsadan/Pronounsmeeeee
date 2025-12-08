@@ -46,7 +46,7 @@ struct OnboardingView: View {
                                 }
                                 .frame(maxWidth: 100)  // يمنع التمدد لليمين ويسار
                         }
-                        .frame(maxWidth: .infinity, alignment: .center)   // أهم سطر
+                        .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.horizontal)
                         
                         Rectangle()
@@ -87,6 +87,7 @@ struct OnboardingView: View {
                         }
                         .padding(.bottom, 40)
                         .transition(.opacity.combined(with: .move(edge: .bottom)))
+                        
                         // رابط الانتقال للصفحة
                         NavigationLink(
                             destination: HomePage(childName: childName, profileImage: ""),
@@ -95,15 +96,15 @@ struct OnboardingView: View {
                             EmptyView()
                         }
                         .hidden()
-
+                        
                     } else {
                         Spacer().frame(height: 40)
                     }
                 }
                 .padding(.horizontal, 24)
             }
-            
-            
+            // 👇 هذا اللي يخلي الهيدر ثابت وما يطلع مع الكيبورد
+            .ignoresSafeArea(.keyboard, edges: .bottom)
         }
     }
     
@@ -162,11 +163,8 @@ extension View {
     }
 }
 
-
-
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingView()
-//            .previewDevice("iPhone 17 Pro")   // اختياري: نوع الجهاز في الكانفاس
     }
 }
