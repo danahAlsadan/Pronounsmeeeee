@@ -9,10 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        d()  
+        NavigationStack {
+            AnimalQuizView()
+                .navigationTitle("الرئيسية")
+        }
     }
 }
 
 #Preview {
-    d()
+    NavigationStack {
+        AnimalQuizView()
+    }
 }

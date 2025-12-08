@@ -28,6 +28,8 @@ struct AnimalQuizView: View {
     @State private var selectedOption: String? = nil
     // Show alert on correct answer
     @State private var showCorrectAlert = false
+    // Navigation to the jar page
+    @State private var goToJar = false
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -39,6 +41,14 @@ struct AnimalQuizView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
+                // Hidden navigation link to StarJarView
+                NavigationLink(
+                    "",
+                    destination: StarJarView(justEarnedStar: true),
+                    isActive: $goToJar
+                )
+                .hidden()
+                
                 // Push content to vertical center
                 Spacer(minLength: 0)
                 
@@ -128,7 +138,8 @@ struct AnimalQuizView: View {
         // Keep only the correct alert
         .alert("Great job!", isPresented: $showCorrectAlert) {
             Button("Continue") {
-                // TODO: Navigate to next page on correct answer
+                // Navigate to the jar when the answer is correct
+                goToJar = true
             }
         } message: {
             Text("Correct choice.")
@@ -173,5 +184,8 @@ struct AnimalQuizView: View {
 }
 
 #Preview {
-    AnimalQuizView()
+    // Ensure this is wrapped in a NavigationStack so navigation works in preview
+    NavigationStack {
+        AnimalQuizView()
+    }
 }
