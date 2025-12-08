@@ -18,6 +18,9 @@ struct d: View {
 
 struct MenuView: View {
     
+    // ✅ إضافة 1: تخزين الحرف المختار في AppStorage بنفس المفتاح المستخدم في AnimalQuizView
+    @AppStorage("selectedLetter") private var selectedLetter: String = "أ"
+    
     let letterImages: [String] = [
         "أ", "ب", "ت", "ث", "ج", "ح", "خ",
         "د", "ذ", "ر", "ز", "س", "ش", "ص",
@@ -239,6 +242,208 @@ struct MenuView: View {
         "ي": (["يِ", "يُ", "يَ"], "oG-ZOdqsctY")
     ]
     
+    
+    private let allStories: [String: StoryItem] = [
+        // الألف
+        "أ": StoryItem(
+            storyLine: "ذهب احمد الى حديقة الحيوان ورأى",
+            options: ["أسد" ,"ثعلب", "جمل"],
+            correctOption: "أسد",
+            imageName: "أسد"
+        ),
+        // الباء
+        "ب": StoryItem(
+            storyLine:"ذهب احمد الى الحديقة ورأى",
+            options: ["بطة", "فيل", "تمساح"],
+            correctOption: "بطة",
+            imageName: "بطة"
+        ),
+        // التاء
+        "ت": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["خروف", "تمساح", "أرنب"],
+            correctOption: "تمساح",
+            imageName: "تمساح"
+        ),
+        // الثاء
+        "ث": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["ثعلب", "قرد", "صقر"],
+            correctOption: "ثعلب",
+            imageName: "ثعلب"
+        ),
+        // الجيم
+        "ج": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["لبوه", "عصفور", "جمل"],
+            correctOption: "جمل",
+            imageName: "جمل"
+        ),
+        // الحاء
+        "ح": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["زرافه", "حصان", "ذئب"],
+            correctOption: "حصان",
+            imageName: "حصان"
+        ),
+        // الخاء
+        "خ": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["خروف", "نحل", "صقر"],
+            correctOption: "خروف",
+            imageName: "خروف"
+        ),
+        // الدال
+        "د": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["نمر", "دب", "يمامه"],
+            correctOption: "دب",
+            imageName: "دب"
+        ),
+        // الذال
+        "ذ": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["ذئب", "بطة", "سمكة"],
+            correctOption: "ذئب",
+            imageName: "ذئب"
+        ),
+        // الراء
+        "ر": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["عصفور", "راكون", "فيل"],
+            correctOption: "راكون",
+            imageName: "راكون"
+        ),
+        // الزاي
+        "ز": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["زرافة", "غوريلا", "عصفور"],
+            correctOption: "زرافة",
+            imageName: "زرافة"
+        ),
+        // السين
+        "س": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["كلب", "غزال", "سلحفاة"],
+            correctOption: "سلحفاة",
+            imageName: "سلحفاة"
+        ),
+        // الشين
+        "ش": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["شجرة", "شمس", "شاي"],
+            correctOption: "شجرة",
+            imageName: "شجرة"
+        ),
+        // الصاد
+        "ص": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["صقر", "ظبي", "ماعز"],
+            correctOption: "صقر",
+            imageName: "صقر"
+        ),
+        // الضاد
+        "ض": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["كلب", "ثور", "ضفدع"],
+            correctOption: "ضفدع",
+            imageName: "ضفدع"
+        ),
+        // الطاء
+        "ط": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["نمر", "طاؤوس", "أسد"],
+            correctOption: "طاؤوس",
+            imageName: "طاؤوس"
+        ),
+        // الظاء
+        "ظ": StoryItem(
+            storyLine: "ذهب احمد الى الحديقة ورأى",
+            options: ["غوريلا", "ظبي", "زرافة"],
+            correctOption: "ظبي",
+            imageName: "ظبي"
+        ),
+        // العين
+        "ع": StoryItem(
+            storyLine: "أحمد رأى في السماء",
+            options: ["عصفور", "عين", "عنب"],
+            correctOption: "عصفور",
+            imageName: "عصفور"
+        ),
+        // الغين
+        "غ": StoryItem(
+            storyLine: "أحمد نظر إلى السماء فشاهد",
+            options: ["غيمة", "غراب", "غطاء"],
+            correctOption: "غيمة",
+            imageName: "غيمة"
+        ),
+        // الفاء
+        "ف": StoryItem(
+            storyLine: "أحمد ذهب إلى الحديقة الكبيرة وشاهد",
+            options: ["فيل", "فأر", "فم"],
+            correctOption: "فيل",
+            imageName: "فيل"
+        ),
+        // القاف
+        "ق": StoryItem(
+            storyLine: "أحمد نظر إلى السماء فرأى",
+            options: ["قمر", "قلم", "قطة"],
+            correctOption: "قمر",
+            imageName: "قمر"
+        ),
+        // الكاف
+        "ك": StoryItem(
+            storyLine: "أحمد شرب الماء من",
+            options: ["كوب", "كتاب", "كرسي"],
+            correctOption: "كوب",
+            imageName: "كوب"
+        ),
+        // اللام
+        "ل": StoryItem(
+            storyLine: "أحمد لعب بـ",
+            options: ["لعبة", "لبن", "لؤلؤ"],
+            correctOption: "لعبة",
+            imageName: "لعبة"
+        ),
+        // الميم
+        "م": StoryItem(
+            storyLine: "أحمد أكل",
+            options: ["موز", "ماء", "ملح"],
+            correctOption: "موز",
+            imageName: "موز"
+        ),
+        // النون
+        "ن": StoryItem(
+            storyLine: "أحمد شاهد في الغابة",
+            options: ["نمر", "نار", "نملة"],
+            correctOption: "نمر",
+            imageName: "نمر"
+        ),
+        // الهاء (هـ)
+        "هـ": StoryItem(
+            storyLine: "أحمد رأى في السماء",
+            options: ["هلال", "هر", "هدهد"],
+            correctOption: "هلال",
+            imageName: "هلال"
+        ),
+        // الواو
+        "و": StoryItem(
+            storyLine: "أحمد شم رائحة",
+            options: ["ورد", "وجه", "ورق"],
+            correctOption: "ورد",
+            imageName: "ورد"
+        ),
+        // الياء
+        "ي": StoryItem(
+            storyLine: "أحمد رأى طائرًا جميلًا هو",
+            options: ["يمامة", "يد", "يوم"],
+            correctOption: "يمامة",
+            imageName: "يمامة"
+        )
+    ]
+
+    
+    
     var body: some View {
         ZStack {
             
@@ -278,22 +483,29 @@ struct MenuView: View {
                                 let lettersForCard = data.0
                                 let videoID = data.1
                                 let allSentences = (letterSentences[imageName] ?? []).flatMap { $0 }//wed I put it there so it could move within the arrays from level 0 to 2
+//                                let allStories =(letterStories[imageName] ?? []).flatMap { $0 }
+                                
                                 NavigationLink {
                                     VideoPage(
                                         letters: lettersForCard,
                                         videoID: videoID,
                                         // Pass only the sentence level (index 2)
 //                                        sentences: (letterSentences[imageName]?[0]) ?? []//cuz
-                                sentences: allSentences//wed cuz  the levels go to the next page 
+                                        sentences: allSentences//wed cuz  the levels go to the next page
                                     )
                                 } label: {
                                     Image(imageName)
                                         .resizable()
-
                                         .frame(width: 269, height: 103)
                                         .clipped()
                                 }
                                 .buttonStyle(.plain)
+                                // ✅ إضافة 2: لما الطفل يضغط على الكرت، نخزن الحرف المختار
+                                .simultaneousGesture(
+                                    TapGesture().onEnded {
+                                        selectedLetter = imageName
+                                    }
+                                )
 
                             } else {
                                 Image(imageName)

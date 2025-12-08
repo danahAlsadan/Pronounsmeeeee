@@ -403,6 +403,6 @@ struct AnimalQuizView: View {
 #Preview {
     // جرّبي تغيير الحرف في المعاينة
     NavigationStack {
-        AnimalQuizView(letter: "ث")
+        AnimalQuizView(letter: "أ")
     }
 }
