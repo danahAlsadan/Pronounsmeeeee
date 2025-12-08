@@ -21,42 +21,260 @@ struct CurvedHeader: Shape {
     }
 }
 
+// نموذج بيانات السؤال/القصة
+struct StoryItem {
+    let storyLine: String           // مثال: "أحمد ذهب إلى الحديقة ورأى"
+    let options: [String]           // 3 خيارات
+    let correctOption: String       // الصحيح
+    let imageName: String           // اسم الصورة في الأصول (عادة = correctOption)
+}
+
+// قاعدة بيانات القصص المخصصة لكل حرف (أكملي بقية الحروف بنفس النمط)
+private let allStories: [String: StoryItem] = [
+    // الألف
+    "أ": StoryItem(
+        storyLine: "ذهب احمد الى حديقة الحيوان ورأى",
+        options: ["أسد" ,"ثعلب", "جمل"],
+        correctOption: "أسد",
+        imageName: "أسد"
+    ),
+    // الباء
+    "ب": StoryItem(
+        storyLine:"ذهب احمد الى الحديقة ورأى",
+        options: ["بطة", "فيل", "تمساح"],
+        correctOption: "بطة",
+        imageName: "بطة"
+    ),
+    // التاء
+    "ت": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["خروف", "تمساح", "أرنب"],
+        correctOption: "تمساح",
+        imageName: "تمساح"
+    ),
+    // الثاء
+    "ث": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["ثعلب", "قرد", "صقر"],
+        correctOption: "ثعلب",
+        imageName: "ثعلب"
+    ),
+    // الجيم
+    "ج": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["لبوه", "عصفور", "جمل"],
+        correctOption: "جمل",
+        imageName: "جمل"
+    ),
+    // الحاء
+    "ح": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["زرافه", "حصان", "ذئب"],
+        correctOption: "حصان",
+        imageName: "حصان"
+    ),
+    // الخاء
+    "خ": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["خروف", "نحل", "صقر"],
+        correctOption: "خروف",
+        imageName: "خروف"
+    ),
+    // الدال
+    "د": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["نمر", "دب", "يمامه"],
+        correctOption: "دب",
+        imageName: "دب"
+    ),
+    // الذال
+    "ذ": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["ذئب", "بطة", "سمكة"],
+        correctOption: "ذئب",
+        imageName: "ذئب"
+    ),
+    // الراء
+    "ر": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["عصفور", "راكون", "فيل"],
+        correctOption: "رمان",
+        imageName: "راكون"
+    ),
+    // الزاي
+    "ز": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["زرافة", "غوريلا", "عصفور"],
+        correctOption: "زرافة",
+        imageName: "زرافة"
+    ),
+    // السين
+    "س": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["كلب", "غزال", "سلحفاة"],
+        correctOption: "سلحفاة",
+        imageName: "سلحفاة"
+    ),
+    // الشين
+    "ش": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["شجرة", "شمس", "شاي"],
+        correctOption: "شجرة",
+        imageName: "شجرة"
+    ),
+    // الصاد
+    "ص": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["صقر", "ظبي", "ماعز"],
+        correctOption: "صقر",
+        imageName: "صقر"
+    ),
+    // الضاد
+    "ض": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["كلب", "ثور", "ضفدع"],
+        correctOption: "ضفدع",
+        imageName: "ضفدع"
+    ),
+    // الطاء
+    "ط": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["نمر", "طاؤوس", "أسد"],
+        correctOption: "طاؤوس",
+        imageName: "طاؤوس"
+    ),
+    // الظاء
+    "ظ": StoryItem(
+        storyLine: "ذهب احمد الى الحديقة ورأى",
+        options: ["غوريلا", "ظبي", "زرافة"],
+        correctOption: "ظبي",
+        imageName: "ظبي"
+    ),
+    // العين
+    "ع": StoryItem(
+        storyLine: "أحمد رأى في السماء",
+        options: ["عصفور", "عين", "عنب"],
+        correctOption: "عصفور",
+        imageName: "عصفور"
+    ),
+    // الغين
+    "غ": StoryItem(
+        storyLine: "أحمد نظر إلى السماء فشاهد",
+        options: ["غيمة", "غراب", "غطاء"],
+        correctOption: "غيمة",
+        imageName: "غيمة"
+    ),
+    // الفاء
+    "ف": StoryItem(
+        storyLine: "أحمد ذهب إلى الحديقة الكبيرة وشاهد",
+        options: ["فيل", "فأر", "فم"],
+        correctOption: "فيل",
+        imageName: "فيل"
+    ),
+    // القاف
+    "ق": StoryItem(
+        storyLine: "أحمد نظر إلى السماء فرأى",
+        options: ["قمر", "قلم", "قطة"],
+        correctOption: "قمر",
+        imageName: "قمر"
+    ),
+    // الكاف
+    "ك": StoryItem(
+        storyLine: "أحمد شرب الماء من",
+        options: ["كوب", "كتاب", "كرسي"],
+        correctOption: "كوب",
+        imageName: "كوب"
+    ),
+    // اللام
+    "ل": StoryItem(
+        storyLine: "أحمد لعب بـ",
+        options: ["لعبة", "لبن", "لؤلؤ"],
+        correctOption: "لعبة",
+        imageName: "لعبة"
+    ),
+    // الميم
+    "م": StoryItem(
+        storyLine: "أحمد أكل",
+        options: ["موز", "ماء", "ملح"],
+        correctOption: "موز",
+        imageName: "موز"
+    ),
+    // النون
+    "ن": StoryItem(
+        storyLine: "أحمد شاهد في الغابة",
+        options: ["نمر", "نار", "نملة"],
+        correctOption: "نمر",
+        imageName: "نمر"
+    ),
+    // الهاء (هـ)
+    "هـ": StoryItem(
+        storyLine: "أحمد رأى في السماء",
+        options: ["هلال", "هر", "هدهد"],
+        correctOption: "هلال",
+        imageName: "هلال"
+    ),
+    // الواو
+    "و": StoryItem(
+        storyLine: "أحمد شم رائحة",
+        options: ["ورد", "وجه", "ورق"],
+        correctOption: "ورد",
+        imageName: "ورد"
+    ),
+    // الياء
+    "ي": StoryItem(
+        storyLine: "أحمد رأى طائرًا جميلًا هو",
+        options: ["يمامة", "يد", "يوم"],
+        correctOption: "يمامة",
+        imageName: "يمامة"
+    )
+]
+
 struct AnimalQuizView: View {
-    // Track if a correct answer (Lion) has been chosen
+    // الحرف المختار القادم من d / VideoPage / RecorderView
+    let letter: String
+
+    // حالة العرض
     @State private var isCorrect = false
-    // Track which option was tapped (for coloring or preventing repeat)
     @State private var selectedOption: String? = nil
-    // Show alert on correct answer
     @State private var showCorrectAlert = false
-    // Navigation to the jar page
     @State private var goToJar = false
-    
+
+    // مُهيّئ افتراضي لتسهيل المعاينة والتشغيل بدون تعديل ملفات أخرى
+    init(letter: String = "أ") {
+        self.letter = letter
+    }
+
+    // العنصر الحالي من قاعدة البيانات المخصصة
+    private var item: StoryItem? {
+        allStories[letter]
+    }
+
     var body: some View {
         ZStack(alignment: .top) {
-            // App background from assets
+            // الخلفية
             Image("خلفيتي")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .ignoresSafeArea()
-            
+
             VStack(spacing: 0) {
-                // Hidden navigation link to StarJarView
+
+                // NavigationLink مخفي للانتقال للبرطمان
                 NavigationLink(
                     "",
                     destination: StarJarView(justEarnedStar: true),
                     isActive: $goToJar
                 )
                 .hidden()
-                
-                // Push content to vertical center
+
                 Spacer(minLength: 0)
-                
-                // Content card: story + letters + image
+
+                // بطاقة القصة + الحروف الأولى الملونة + الصورة
                 VStack(spacing: 0) {
-                    // Main text
+                    // نص القصة
                     VStack(spacing: 0) {
-                        Text("Ahmed went to the zoo and found")
+                        Text(item?.storyLine ?? "أحمد ذهب إلى الحديقة ورأى")
                             .multilineTextAlignment(.center)
                             .font(.system(size: 22, weight: .regular))
                             .foregroundColor(.black)
@@ -66,105 +284,92 @@ struct AnimalQuizView: View {
                             .padding(.top, 2)
                     }
                     .padding(.top, 2)
-                    
-                    // Animal names with colored first letters (English)
+
+                    // الحروف الأولى الملوّنة (من الخيارات الحالية)
                     HStack(spacing: 20) {
-                        // Camel
-                        HStack(spacing: 0) {
-                            Text("C")
-                                .foregroundColor(.brown)
-                            Text("amel")
-                                .foregroundColor(.black)
+                        ForEach((item?.options ?? []), id: \.self) { word in
+                            let first = String(word.prefix(1))
+                            let rest = String(word.dropFirst())
+                            HStack(spacing: 0) {
+                                Text(first)
+                                    .foregroundColor(.brown)
+                                Text(rest)
+                                    .foregroundColor(.black)
+                            }
+                            .font(.system(size: 24, weight: .regular))
                         }
-                        .font(.system(size: 24, weight: .regular))
-                        
-                        // Duck
-                        HStack(spacing: 0) {
-                            Text("D")
-                                .foregroundColor(.brown)
-                            Text("uck")
-                                .foregroundColor(.black)
-                        }
-                        .font(.system(size: 24, weight: .regular))
-                        
-                        // Lion
-                        HStack(spacing: 0) {
-                            Text("L")
-                                .foregroundColor(.brown)
-                            Text("ion")
-                                .foregroundColor(.black)
-                        }
-                        .font(.system(size: 24, weight: .regular))
                     }
                     .padding(.horizontal, 12)
-                    
-                    // Lion image (asset still named in Arabic unless you provide an English name)
-                    Image("أسد")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 250, height: 250)
-                        .padding(.top, 2)
+
+                    // صورة الحيوان (اسمها = imageName)
+                    if let imageName = item?.imageName {
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 250, height: 250)
+                            .padding(.top, 2)
+                    } else {
+                        Rectangle()
+                            .fill(Color.white.opacity(0.4))
+                            .frame(width: 250, height: 250)
+                            .overlay(
+                                Text("لا توجد صورة")
+                                    .foregroundColor(.gray)
+                            )
+                            .padding(.top, 2)
+                    }
                 }
                 .padding(.vertical, 3)
                 .padding(.horizontal, 6)
-                .frame(maxWidth: 560) // wider on small screens
+                .frame(maxWidth: 560)
                 .background(
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
-                        //خلفية القصه
-                        .fill(Color.white) // خلفية صفراء
+                        .fill(Color.white)
                 )
                 .shadow(color: .black.opacity(0.18), radius: 10, x: 0, y: 8)
                 .shadow(color: .white.opacity(0.2), radius: 2, x: -1, y: -1)
                 .padding(.horizontal, 30)
-                
-                // Answer options horizontally
+
+                // أزرار الخيارات
                 HStack(spacing: 12) {
-                    liquidGlassButton(title: "Camel") {
-                        handleSelection(option: "Camel")
-                    }
-                    liquidGlassButton(title: "Duck") {
-                        handleSelection(option: "Duck")
-                    }
-                    liquidGlassButton(title: "Lion") {
-                        handleSelection(option: "Lion")
+                    ForEach((item?.options ?? []), id: \.self) { option in
+                        liquidGlassButton(title: option) {
+                            handleSelection(option: option)
+                        }
                     }
                 }
                 .padding(.top, 16)
                 .padding(.horizontal, 40)
-                
+
                 Spacer(minLength: 0)
             }
         }
-        // Keep only the correct alert
-        .alert("Great job!", isPresented: $showCorrectAlert) {
-            Button("Continue") {
-                // Navigate to the jar when the answer is correct
+        .alert("أحسنت!", isPresented: $showCorrectAlert) {
+            Button("متابعة") {
                 goToJar = true
             }
         } message: {
-            Text("Correct choice.")
+            Text("إجابة صحيحة.")
         }
     }
-    
+
     // MARK: - Actions
     private func handleSelection(option: String) {
         selectedOption = option
-        if option == "Lion" {
+        if option == item?.correctOption {
             isCorrect = true
             showCorrectAlert = true
         } else {
             isCorrect = false
-            // No alert for wrong answer; only button color changes via selectedOption
         }
     }
-    
+
     // MARK: - Components
-    // Reusable "Liquid Glass" button
     @ViewBuilder
     private func liquidGlassButton(title: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             let isSelected = selectedOption == title
-            let isRight = title == "Lion"
+            let isRight = title == item?.correctOption
             Text(title)
                 .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(isSelected ? (isRight ? .green : .red) : .white)
@@ -179,13 +384,14 @@ struct AnimalQuizView: View {
                         .stroke(Color(hex: "F3BB34"))
                 )
         }
-        .disabled(isCorrect && title != "Lion")
+        // بعد اختيار الصحيح، نوقف الأزرار الأخرى
+        .disabled(isCorrect && title != item?.correctOption)
     }
 }
 
 #Preview {
-    // Ensure this is wrapped in a NavigationStack so navigation works in preview
+    // جرّبي تغيير الحرف في المعاينة
     NavigationStack {
-        AnimalQuizView()
+        AnimalQuizView(letter: "ث")
     }
 }
