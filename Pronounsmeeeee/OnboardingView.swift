@@ -1,3 +1,8 @@
+//
+//  OnboardingView.swift
+//  Pronounsmeeeee
+//
+
 import SwiftUI
 
 struct OnboardingView: View {
@@ -13,7 +18,7 @@ struct OnboardingView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 // الخلفية
                 Image("SplashBackRound")
@@ -57,6 +62,7 @@ struct OnboardingView: View {
                     // مسافة تحت الهيدر
                     Spacer().frame(height: 70)
                     
+                    // MARK: - Boy / Girl
                     // MARK: - Boy / Girl with stars
                     HStack(spacing: 45) {
                         genderColumn(type: .boy)
@@ -69,9 +75,10 @@ struct OnboardingView: View {
                     // MARK: - زر Let’s Practice
                     if canProceed {
                         Button {
+                            saveUserData()
                             navigateToHome = true
                         } label: {
-                            Text("Let’s Practice")
+                            Text("Let's Practice")
                                 .font(.system(size: 26, weight: .bold))
                                 .foregroundColor(accentColor)
                                 .padding(.horizontal, 50)
@@ -97,17 +104,26 @@ struct OnboardingView: View {
                     }
                 }
                 .padding(.horizontal, 24)
-                // 👈 هذي هي اللي تثبّت الهيدر بالأعلى حتى مع الكيبورد
-                .frame(maxWidth: .infinity,
-                       maxHeight: .infinity,
-                       alignment: .top)
             }
+            .navigationDestination(isPresented: $navigateToHome) {
+                HomePage(
+                    childName: childName,
+                    profileImage: selectedGender == .boy ? "Boy" : "Girl"
+                )
+            }
+            .navigationBarBackButtonHidden(true)
         }
         // الكيبورد ما يلعب في الـ safe area من تحت
         .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
-    // MARK: - عمود ولد / بنت
+    // حفظ البيانات في UserDefaults
+    private func saveUserData() {
+        UserDefaults.standard.set(childName, forKey: "childName")
+        UserDefaults.standard.set(selectedGender == .boy ? "Boy" : "Girl", forKey: "profileImage")
+    }
+    
+    // MARK: - عمود ولد/بنت
     private func genderColumn(type: Gender) -> some View {
         let isSelected = selectedGender == type
         
@@ -140,7 +156,6 @@ struct OnboardingView: View {
     }
 }
 
-// نوع الجنس
 enum Gender {
     case boy
     case girl
@@ -160,8 +175,6 @@ extension View {
     }
 }
 
-struct OnboardingView_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardingView()
-    }
+#Preview {
+    OnboardingView()
 }

@@ -3,7 +3,8 @@ import ConfettiSwiftUI
 
 struct RecorderView: View {
     @StateObject var recognizer = SpeechRecognizer()
-    let db = SQLiteManager()
+//    let db = SQLiteManager()
+    @AppStorage("selectedLetter") private var selectedLetter: String = ""
 
     @State private var goToStory = false
 
@@ -37,7 +38,7 @@ struct RecorderView: View {
                 .ignoresSafeArea()
             
             NavigationLink(
-                destination: AnimalQuizView(), // ← غيريها لصفحتك
+                destination: AnimalQuizView(letter: selectedLetter), // هنا نمرر الحرف المختار
                 isActive: $goToStory
             ) {
                 EmptyView()
@@ -187,14 +188,14 @@ struct RecorderView: View {
 
         if spoken.contains(target) {
             resultMessage = "😁"
-            db.insert(word: targetWord, correct: true)
+//            db.insert(word: targetWord, correct: true)
             showNextButton = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 showNextButton = true
             }
         } else {
             resultMessage = "😕"
-            db.insert(word: targetWord, correct: false)
+//            db.insert(word: targetWord, correct: false)
         }
     }
     
