@@ -63,7 +63,6 @@ struct OnboardingView: View {
                     Spacer().frame(height: 70)
                     
                     // MARK: - Boy / Girl
-                    // MARK: - Boy / Girl with stars
                     HStack(spacing: 45) {
                         genderColumn(type: .boy)
                         genderColumn(type: .girl)
@@ -92,19 +91,14 @@ struct OnboardingView: View {
                         .padding(.bottom, 40)
                         .transition(.opacity.combined(with: .move(edge: .bottom)))
                         
-                        NavigationLink(
-                            destination: HomePage(childName: childName, profileImage: ""),
-                            isActive: $navigateToHome
-                        ) {
-                            EmptyView()
-                        }
-                        .hidden()
                     } else {
                         Spacer().frame(height: 40)
                     }
                 }
                 .padding(.horizontal, 24)
             }
+            
+            // *** هنا التنقّل حق الكود الأول بس *** wed 
             .navigationDestination(isPresented: $navigateToHome) {
                 HomePage(
                     childName: childName,
@@ -113,11 +107,10 @@ struct OnboardingView: View {
             }
             .navigationBarBackButtonHidden(true)
         }
-        // الكيبورد ما يلعب في الـ safe area من تحت
         .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
-    // حفظ البيانات في UserDefaults
+    // حفظ البيانات
     private func saveUserData() {
         UserDefaults.standard.set(childName, forKey: "childName")
         UserDefaults.standard.set(selectedGender == .boy ? "Boy" : "Girl", forKey: "profileImage")
@@ -161,7 +154,6 @@ enum Gender {
     case girl
 }
 
-// Placeholder modifier
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
