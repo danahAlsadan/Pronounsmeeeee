@@ -118,6 +118,16 @@ struct RecorderView: View {
                             .cornerRadius(25)
                     }
                 }
+                Button(action: {
+                    goToStory = true
+                    }) {
+                        Text("القصة (مؤقت)")
+                            .font(.title3)
+                            .foregroundColor(.white)
+                            .frame(width: 200, height: 42)
+                            .background(Color.blue.opacity(0.8))
+                            .cornerRadius(25)
+                    }
 
                 Spacer()
             }
