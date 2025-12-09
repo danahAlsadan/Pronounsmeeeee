@@ -7,7 +7,6 @@ struct OnboardingView: View {
     private let accentColor = Color(hex: "#EE822B")
     @State private var navigateToHome: Bool = false
 
-    // يظهر زر Let’s Practice لما الاسم مو فاضي + اختيار الجنس
     private var canProceed: Bool {
         !childName.trimmingCharacters(in: .whitespaces).isEmpty &&
         selectedGender != nil
@@ -16,7 +15,7 @@ struct OnboardingView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // خلفية زرقاء من الصورة
+                // الخلفية
                 Image("SplashBackRound")
                     .resizable()
                     .scaledToFill()
@@ -24,9 +23,8 @@ struct OnboardingView: View {
                 
                 VStack(spacing: 24) {
                     
-                    // MARK: - Hello + Name (متمركزة بالكامل)
+                    // MARK: - Hello + Name
                     VStack(spacing: 6) {
-                        
                         HStack(spacing: 15) {
                             Text("Hello")
                                 .font(.system(size: 35, weight: .bold))
@@ -44,7 +42,7 @@ struct OnboardingView: View {
                                         .italic()
                                         .foregroundColor(accentColor.opacity(0.35))
                                 }
-                                .frame(maxWidth: 100)  // يمنع التمدد لليمين ويسار
+                                .frame(maxWidth: 100)
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.horizontal)
@@ -54,13 +52,12 @@ struct OnboardingView: View {
                             .frame(width: 250, height: 3)
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
-                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.top, 30)
                     
-                    // مسافة إضافية عشان ننزل الشخصيات والنجوم
+                    // مسافة تحت الهيدر
                     Spacer().frame(height: 70)
                     
-                    // MARK: - Boy / Girl with stars (منزّلة تحت شوي)
+                    // MARK: - Boy / Girl with stars
                     HStack(spacing: 45) {
                         genderColumn(type: .boy)
                         genderColumn(type: .girl)
@@ -69,7 +66,7 @@ struct OnboardingView: View {
                     
                     Spacer()
                     
-                    // MARK: - Let’s Practice button
+                    // MARK: - زر Let’s Practice
                     if canProceed {
                         Button {
                             navigateToHome = true
@@ -88,7 +85,6 @@ struct OnboardingView: View {
                         .padding(.bottom, 40)
                         .transition(.opacity.combined(with: .move(edge: .bottom)))
                         
-                        // رابط الانتقال للصفحة
                         NavigationLink(
                             destination: HomePage(childName: childName, profileImage: ""),
                             isActive: $navigateToHome
@@ -96,32 +92,31 @@ struct OnboardingView: View {
                             EmptyView()
                         }
                         .hidden()
-                        
                     } else {
                         Spacer().frame(height: 40)
                     }
                 }
                 .padding(.horizontal, 24)
-            }
-            // iOS 16+ navigation API: present HomePage when navigateToHome becomes true
-            .navigationDestination(isPresented: $navigateToHome) {
-                HomePage(childName: childName, profileImage: "")
+                // 👈 هذي هي اللي تثبّت الهيدر بالأعلى حتى مع الكيبورد
+                .frame(maxWidth: .infinity,
+                       maxHeight: .infinity,
+                       alignment: .top)
             }
         }
+        // الكيبورد ما يلعب في الـ safe area من تحت
+        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
-    // MARK: - عمود ولد/بنت (الصورة + النجمة الزر)
+    // MARK: - عمود ولد / بنت
     private func genderColumn(type: Gender) -> some View {
         let isSelected = selectedGender == type
         
         return VStack(spacing: 5) {
-            // صورة الولد/البنت
             Image(type == .boy ? "Boy" : "Girl")
                 .resizable()
                 .scaledToFit()
                 .frame(height: 180)
             
-            // زر النجمة
             Button {
                 selectedGender = type
             } label: {
@@ -151,7 +146,7 @@ enum Gender {
     case girl
 }
 
-// Placeholder modifier للـ TextField
+// Placeholder modifier
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
