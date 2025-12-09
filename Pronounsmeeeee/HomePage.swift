@@ -1,4 +1,3 @@
-
 //
 //  HomePage.swift
 //  Pronounsmeeeee
@@ -9,13 +8,10 @@ import SwiftUI
 struct HomePage: View {
     let childName: String
     let profileImage: String
+    
     @State private var goToMenu = false
-    @State private var goTocalender = false
-
-
+    @State private var goToCalendar = false
     @State private var starScale: CGFloat = 1.0
-    var onCalendarTap: () -> Void = {}
-    var onStarTap: () -> Void = {}
     
     var body: some View {
         NavigationStack {
@@ -29,21 +25,33 @@ struct HomePage: View {
                 VStack(spacing: 0) {
                     // الهيدر
                     HStack(spacing: 16) {
-                        // صورة الطفل - أصغر
-                        ZStack {
-                            Circle()
-                                .fill(Color.blue)
-                                .frame(width: 70, height: 70)
-                            
-                            Circle()
-                                .fill(Color.white)
-                                .frame(width: 64, height: 64)
-                            
-                            Image(systemName: "person.fill")
+                        // صورة الطفل
+                        if !profileImage.isEmpty {
+                            Image(profileImage)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 32, height: 32)
-                                .foregroundColor(.blue)
+                                .frame(width: 70, height: 70)
+                                .clipShape(Circle())
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.blue, lineWidth: 3)
+                                )
+                        } else {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.blue)
+                                    .frame(width: 70, height: 70)
+                                
+                                Circle()
+                                    .fill(Color.white)
+                                    .frame(width: 64, height: 64)
+                                
+                                Image(systemName: "person.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 32, height: 32)
+                                    .foregroundColor(.blue)
+                            }
                         }
                         
                         // الاسم
@@ -61,8 +69,7 @@ struct HomePage: View {
                         
                         // زر الكاليندر
                         Button {
-                            onCalendarTap()
-                            goTocalender = true
+                            goToCalendar = true
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)
@@ -74,64 +81,63 @@ struct HomePage: View {
                                     .foregroundColor(.yellow)
                             }
                         }
-                        NavigationLink("", destination: CalendarView(), isActive: $goTocalender)
-                            .hidden()
-                        
                     }
                     .padding(.horizontal, 32)
                     .padding(.top, 60)
                     
                     Spacer()
                     
-                    // النجمة - بحجم أكبر وثابتة
+                    // النجمة - مع أنيميشن خفيف جداً
                     Button {
-                        onStarTap()
                         goToMenu = true
                     } label: {
                         ZStack {
-                            // النجمة الرئيسية - أكبر
-                            Image( "Star")
+                            // النجمة فقط عليها الأنيميشن
+                            Image("Star")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 260, height: 260)
-                                .foregroundColor(.yellow)
                                 .shadow(color: .yellow.opacity(0.5), radius: 20)
                                 .scaleEffect(starScale)
+                                .animation(.easeInOut(duration: 2.5).repeatForever(autoreverses: true), value: starScale)
                             
-                            // النص
+                            // النص ثابت
                             Text("ابدأ\nالتمارين")
                                 .font(.system(size: 28, weight: .bold))
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(Color(hex: "EE822B"))
                         }
                     }
-                    NavigationLink("", destination: d(), isActive: $goToMenu)
-                        .hidden()
+                    .buttonStyle(PlainButtonStyle())
+                    .onAppear {
+                        starScale = 1.05  // حركة خفيفة جداً - من 1.0 إلى 1.05
+                    }
+                    
                     Spacer()
                     
-                    // رسالة تحفيزية - لون أبيض
+                    // رسالة تحفيزية
                     VStack(spacing: 8) {
-                        Text("")
+                        Text("🌟")
                             .font(.system(size: 40))
                         
-                        Text("")
+                        Text("استعد لمغامرة تعلم رائعة!")
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(.white)
                     }
                     .padding(.bottom, 60)
                 }
             }
-            .navigationBarBackButtonHidden(true)   // remove back button by defult from last page (on boarding view )
-            .onAppear {
-                // أنيميشن تكبير وتصغير بطيء
-                withAnimation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true)) {
-                    starScale = 1.15
-                }
+            .navigationDestination(isPresented: $goToMenu) {
+                d()
             }
+            .navigationDestination(isPresented: $goToCalendar) {
+                CalendarView()
+            }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
 
 #Preview {
-    HomePage(childName: "أحمد", profileImage: "")
+    HomePage(childName: "أحمد", profileImage: "Boy")
 }

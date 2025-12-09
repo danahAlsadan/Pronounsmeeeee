@@ -454,26 +454,26 @@ struct MenuView: View {
             
             VStack(alignment: .leading, spacing: 24) {
 
-                HStack(spacing: 12) {
-                    ZStack {
-                        Circle()
-           .stroke(Color(red: 0.20, green: 0.50, blue: 0.90), lineWidth: 6)
-            .frame(width: 60, height: 60)
-
-      Image(systemName: "person.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 32, height: 32)
-                            .foregroundColor(Color(red: 0.20, green: 0.50, blue: 0.90))
-                    }
-                    
-                    Text("name")
-                        .font(.system(size: 32, weight: .regular))
-                        .foregroundColor(Color(red: 0.85, green: 0.27, blue: 0.16))
-                    
-                    Spacer()
-                }
-                .padding(.top, 40)
+//                HStack(spacing: 12) {
+//                    ZStack {
+//                        Circle()
+//           .stroke(Color(red: 0.20, green: 0.50, blue: 0.90), lineWidth: 6)
+//            .frame(width: 60, height: 60)
+//
+//      Image(systemName: "person.fill")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 32, height: 32)
+//                            .foregroundColor(Color(red: 0.20, green: 0.50, blue: 0.90))
+//                    }
+//                    
+//                    Text("name")
+//                        .font(.system(size: 32, weight: .regular))
+//                        .foregroundColor(Color(red: 0.85, green: 0.27, blue: 0.16))
+//                    
+//                    Spacer()
+//                }
+//                .padding(.top, 40)
 
                 ScrollView {
                     VStack(spacing: 18) {

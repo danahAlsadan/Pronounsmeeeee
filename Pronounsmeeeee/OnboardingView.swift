@@ -1,3 +1,8 @@
+//
+//  OnboardingView.swift
+//  Pronounsmeeeee
+//
+
 import SwiftUI
 
 struct OnboardingView: View {
@@ -7,16 +12,14 @@ struct OnboardingView: View {
     private let accentColor = Color(hex: "#EE822B")
     @State private var navigateToHome: Bool = false
 
-    // يظهر زر Let’s Practice لما الاسم مو فاضي + اختيار الجنس
     private var canProceed: Bool {
         !childName.trimmingCharacters(in: .whitespaces).isEmpty &&
         selectedGender != nil
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
-                // خلفية زرقاء من الصورة
                 Image("SplashBackRound")
                     .resizable()
                     .scaledToFill()
@@ -24,7 +27,7 @@ struct OnboardingView: View {
                 
                 VStack(spacing: 24) {
                     
-                    // MARK: - Hello + Name (متمركزة بالكامل)
+                    // MARK: - Hello + Name
                     VStack(spacing: 6) {
                         
                         HStack(spacing: 15) {
@@ -44,7 +47,7 @@ struct OnboardingView: View {
                                         .italic()
                                         .foregroundColor(accentColor.opacity(0.35))
                                 }
-                                .frame(maxWidth: 100)  // يمنع التمدد لليمين ويسار
+                                .frame(maxWidth: 100)
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.horizontal)
@@ -57,10 +60,9 @@ struct OnboardingView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.top, 30)
                     
-                    // مسافة إضافية عشان ننزل الشخصيات والنجوم
                     Spacer().frame(height: 70)
                     
-                    // MARK: - Boy / Girl with stars (منزّلة تحت شوي)
+                    // MARK: - Boy / Girl
                     HStack(spacing: 45) {
                         genderColumn(type: .boy)
                         genderColumn(type: .girl)
@@ -69,12 +71,13 @@ struct OnboardingView: View {
                     
                     Spacer()
                     
-                    // MARK: - Let’s Practice button
+                    // MARK: - Let's Practice button
                     if canProceed {
                         Button {
+                            saveUserData()
                             navigateToHome = true
                         } label: {
-                            Text("Let’s Practice")
+                            Text("Let's Practice")
                                 .font(.system(size: 26, weight: .bold))
                                 .foregroundColor(accentColor)
                                 .padding(.horizontal, 50)
@@ -87,41 +90,38 @@ struct OnboardingView: View {
                         }
                         .padding(.bottom, 40)
                         .transition(.opacity.combined(with: .move(edge: .bottom)))
-                        
-                        // رابط الانتقال للصفحة
-                        NavigationLink(
-                            destination: HomePage(childName: childName, profileImage: ""),
-                            isActive: $navigateToHome
-                        ) {
-                            EmptyView()
-                        }
-                        .hidden()
-                        
                     } else {
                         Spacer().frame(height: 40)
                     }
                 }
                 .padding(.horizontal, 24)
             }
-            // iOS 16+ navigation API: present HomePage when navigateToHome becomes true
             .navigationDestination(isPresented: $navigateToHome) {
-                HomePage(childName: childName, profileImage: "")
+                HomePage(
+                    childName: childName,
+                    profileImage: selectedGender == .boy ? "Boy" : "Girl"
+                )
             }
+            .navigationBarBackButtonHidden(true)
         }
     }
     
-    // MARK: - عمود ولد/بنت (الصورة + النجمة الزر)
+    // حفظ البيانات في UserDefaults
+    private func saveUserData() {
+        UserDefaults.standard.set(childName, forKey: "childName")
+        UserDefaults.standard.set(selectedGender == .boy ? "Boy" : "Girl", forKey: "profileImage")
+    }
+    
+    // MARK: - عمود ولد/بنت
     private func genderColumn(type: Gender) -> some View {
         let isSelected = selectedGender == type
         
         return VStack(spacing: 5) {
-            // صورة الولد/البنت
             Image(type == .boy ? "Boy" : "Girl")
                 .resizable()
                 .scaledToFit()
                 .frame(height: 180)
             
-            // زر النجمة
             Button {
                 selectedGender = type
             } label: {
@@ -145,13 +145,11 @@ struct OnboardingView: View {
     }
 }
 
-// نوع الجنس
 enum Gender {
     case boy
     case girl
 }
 
-// Placeholder modifier للـ TextField
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
@@ -165,8 +163,6 @@ extension View {
     }
 }
 
-struct OnboardingView_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardingView()
-    }
+#Preview {
+    OnboardingView()
 }
