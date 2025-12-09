@@ -94,26 +94,20 @@ struct OnboardingView: View {
                         .padding(.bottom, 40)
                         .transition(.opacity.combined(with: .move(edge: .bottom)))
                         
-                        NavigationLink(
-                            destination: HomePage(childName: childName, profileImage: ""),
-                            isActive: $navigateToHome
-                        ) {
-                            EmptyView()
-                        }
-                        .hidden()
                     } else {
                         Spacer().frame(height: 40)
                     }
                 }
                 .padding(.horizontal, 24)
             }
-            .navigationDestination(isPresented: $navigateToHome) {
-                HomePage(
-                    childName: childName,
-                    profileImage: selectedGender == .boy ? "Boy" : "Girl"
-                )
-            }
-            .navigationBarBackButtonHidden(true)
+            // *** هنا التنقّل حق الكود الأول بس ***
+                        .navigationDestination(isPresented: $navigateToHome) {
+                            HomePage(
+                                childName: childName,
+                                profileImage: selectedGender == .boy ? "Boy" : "Girl"
+                            )
+                        }
+                        .navigationBarBackButtonHidden(true)
         }
         // الكيبورد ما يلعب في الـ safe area من تحت
         .ignoresSafeArea(.keyboard, edges: .bottom)
