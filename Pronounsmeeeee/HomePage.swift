@@ -117,10 +117,10 @@ struct HomePage: View {
                     
                     // رسالة تحفيزية
                     VStack(spacing: 8) {
-                        Text("🌟")
+                        Text("")
                             .font(.system(size: 40))
                         
-                        Text("استعد لمغامرة تعلم رائعة!")
+                        Text("")
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(.white)
                     }
