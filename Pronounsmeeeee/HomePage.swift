@@ -14,7 +14,7 @@ struct HomePage: View {
     @State private var starScale: CGFloat = 1.0
     
     var body: some View {
-        NavigationStack {
+//        NavigationStack {
             ZStack {
                 // الخلفية
                 Image("خلفيتي")
@@ -136,7 +136,7 @@ struct HomePage: View {
             .navigationBarBackButtonHidden(true)
         }
     }
-}
+//}
 
 #Preview {
     HomePage(childName: "أحمد", profileImage: "Boy")
