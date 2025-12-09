@@ -4,6 +4,7 @@ import ConfettiSwiftUI
 struct RecorderView: View {
     @StateObject var recognizer = SpeechRecognizer()
 //    let db = SQLiteManager()
+    @AppStorage("selectedLetter") private var selectedLetter: String = ""
 
     @State private var goToStory = false
 
