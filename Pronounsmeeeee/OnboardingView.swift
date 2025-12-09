@@ -26,11 +26,12 @@ struct OnboardingView: View {
                     .scaledToFill()
                     .ignoresSafeArea()
                 
-                VStack(spacing: 24) {
+                VStack(spacing: 20) {
                     
-                    // MARK: - Hello + Name
-                    VStack(spacing: 6) {
-                        HStack(spacing: 15) {
+                    // MARK: - Hello + Name (متمركزة بالكامل بس نازلة شوي)
+                    VStack(spacing: 3) {
+                        
+                        HStack(spacing: 10) {
                             Text("Hello")
                                 .font(.system(size: 35, weight: .bold))
                                 .italic()
@@ -45,30 +46,31 @@ struct OnboardingView: View {
                                     Text("Name")
                                         .font(.system(size: 35, weight: .semibold))
                                         .italic()
-                                        .foregroundColor(accentColor.opacity(0.35))
+                                        .foregroundColor(accentColor.opacity(0.50))
                                 }
-                                .frame(maxWidth: 100)
+                                .frame(maxWidth: 120)
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.horizontal)
-                        
+
                         Rectangle()
                             .fill(accentColor.opacity(0.4))
                             .frame(width: 250, height: 3)
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
-                    .padding(.top, 30)
+                    // ✳️ نزّلته أكثر تحت
+                    .padding(.top, 180)   // جربي 140–160 لين يضبط معاك
                     
                     // مسافة تحت الهيدر
-                    Spacer().frame(height: 70)
+                    Spacer().frame(height: 1)
                     
                     // MARK: - Boy / Girl
                     // MARK: - Boy / Girl with stars
-                    HStack(spacing: 45) {
+                    HStack(spacing: 20) {
                         genderColumn(type: .boy)
                         genderColumn(type: .girl)
                     }
-                    .padding(.top, 50)
+                    .padding(.top, 5)
                     
                     Spacer()
                     
