@@ -57,8 +57,26 @@ struct StarJarView: View {
                 .padding(.horizontal, 6)
                 .frame(maxWidth: 360)
                 .background(
-                    RoundedRectangle(cornerRadius: 20, style: .continuous)
-                        .fill(Color.white)
+                    // Liquid Glass background
+                    RoundedRectangle(cornerRadius: 100, style: .continuous)
+                        .fill(.ultraThinMaterial)
+                        .overlay(
+                            // لمعة/حد خفيف يعطي إحساس الزجاج
+                            RoundedRectangle(cornerRadius: 1000, style: .continuous)
+                                .strokeBorder(
+                                    LinearGradient(
+                                        colors: [
+                                            Color.white.opacity(0.100),
+                                            Color.white.opacity(0.100)
+                                        ],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 1
+                                )
+                        )
+                        .shadow(color: .black.opacity(0.18), radius: 10, x: 0, y: 8)
+                        .shadow(color: .white.opacity(0.20), radius: 2, x: -1, y: -1)
                 )
 
                 Spacer()
