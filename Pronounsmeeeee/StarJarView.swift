@@ -8,11 +8,16 @@ import SwiftUI
 
 struct StarJarView: View {
     let justEarnedStar: Bool          // لو true يعني الطفل توه كاسب نجمة
+    @State private var goToHomepage  = false
 
     // عدد النجوم المخزّنة (ينحفظ في UserDefaults تلقائيًا)
     @AppStorage("starCount") private var starCount: Int = 0
     // تاريخ آخر مرة أضفنا فيها نجمة (مفتاح نصي لليوم)
     @AppStorage("lastStarDate") private var lastStarDate: String = ""
+
+    // نقرأ بيانات الطفل المحفوظة من Onboarding
+    @AppStorage("childName") private var storedChildName: String = ""
+    @AppStorage("profileImage") private var storedProfileImage: String = ""
 
     // حد أقصى للنجوم
     private let maxStars = 28
@@ -78,6 +83,24 @@ struct StarJarView: View {
                         .shadow(color: .black.opacity(0.18), radius: 10, x: 0, y: 8)
                         .shadow(color: .white.opacity(0.20), radius: 2, x: -1, y: -1)
                 )
+                .navigationDestination(isPresented: $goToHomepage) {
+                    HomePage(
+                        childName: storedChildName,
+                        profileImage: storedProfileImage
+                    )
+                }
+                .navigationBarBackButtonHidden(true)
+
+                Button(action: {
+                    goToHomepage = true
+                }) {
+                    Text("أحسنت")
+                        .font(.title3)
+                        .foregroundColor(.white)
+                        .frame(width: 210, height: 42)
+                        .background(Color(hex: "f6b922"))
+                        .cornerRadius(25)
+                }
 
                 Spacer()
             }

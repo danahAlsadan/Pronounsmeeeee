@@ -14,7 +14,7 @@ struct HomePage: View {
     @State private var starScale: CGFloat = 1.0
     
     var body: some View {
-//        NavigationStack {
+        NavigationStack {
             ZStack {
                 // الخلفية
                 Image("خلفيتي")
@@ -88,20 +88,39 @@ struct HomePage: View {
                     Spacer()
                     
                     // النجمة - مع أنيميشن خفيف جداً
+//                    Button {
+//                        goToMenu = true
+//                    } label: {
+//                        ZStack {
+//                            // النجمة فقط عليها الأنيميشن
+//                            Image("Star")
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 260, height: 260)
+//                                .shadow(color: .yellow.opacity(0.5), radius: 20)
+//                                .scaleEffect(starScale)
+//                                .animation(.easeInOut(duration: 2.5).repeatForever(autoreverses: true), value: starScale)
+//                            
+//                            // النص ثابت
+//                            Text("ابدأ\nالتمارين")
+//                                .font(.system(size: 28, weight: .bold))
+//                                .multilineTextAlignment(.center)
+//                                .foregroundColor(Color(hex: "EE822B"))
+//                        }
+//                    }
+//                    .buttonStyle(PlainButtonStyle())
+                    
+                    
                     Button {
                         goToMenu = true
                     } label: {
                         ZStack {
-                            // النجمة فقط عليها الأنيميشن
                             Image("Star")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 260, height: 260)
                                 .shadow(color: .yellow.opacity(0.5), radius: 20)
-                                .scaleEffect(starScale)
-                                .animation(.easeInOut(duration: 2.5).repeatForever(autoreverses: true), value: starScale)
-                            
-                            // النص ثابت
+
                             Text("ابدأ\nالتمارين")
                                 .font(.system(size: 28, weight: .bold))
                                 .multilineTextAlignment(.center)
@@ -136,7 +155,7 @@ struct HomePage: View {
             .navigationBarBackButtonHidden(true)
         }
     }
-//}
+}
 
 #Preview {
     HomePage(childName: "أحمد", profileImage: "Boy")
