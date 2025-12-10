@@ -47,10 +47,10 @@ private let allStories: [String: StoryItem] = [
     ),
     // التاء
     "ت": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["خروف", "تمساح", "أرنب"],
-        correctOption: "تمساح",
-        imageName: "تمساح"
+        storyLine:"لبست الأميره",
+        options: ["حقيبة","فستان","تاج"],
+        correctOption: "تاج",
+        imageName: "تاج"
     ),
     // الثاء
     "ث": StoryItem(
@@ -75,10 +75,10 @@ private let allStories: [String: StoryItem] = [
     ),
     // الخاء
     "خ": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["خروف", "نحل", "صقر"],
-        correctOption: "خروف",
-        imageName: "خروف"
+        storyLine: "أكلت دانه",
+        options: ["خيار", "نحل", "صقر"],
+        correctOption: "خيار",
+        imageName: "خيار"
     ),
     // الدال
     "د": StoryItem(
@@ -96,10 +96,10 @@ private let allStories: [String: StoryItem] = [
     ),
     // الراء
     "ر": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["عصفور", "راكون", "فيل"],
-        correctOption: "راكون",
-        imageName: "راكون"
+        storyLine: "أرسل أحمد",
+        options: ["رسالة", "رمان", "رمل"],
+        correctOption: "رسالة",
+        imageName: "رسالة"
     ),
     // الزاي
     "ز": StoryItem(
@@ -110,17 +110,17 @@ private let allStories: [String: StoryItem] = [
     ),
     // السين
     "س": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["كلب", "غزال", "سلحفاة"],
-        correctOption: "سلحفاة",
-        imageName: "سلحفاة"
+        storyLine: "شاهد أحمد في البحر",
+        options: ["كلب", "غزال", "سفينة"],
+        correctOption: "سفينة",
+        imageName: "سفينة"
     ),
     // الشين
     "ش": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["شجرة", "شمس", "شاي"],
-        correctOption: "شجرة",
-        imageName: "شجرة"
+        storyLine: "ذهب أحمد إلى",
+        options: ["شاطئ", "شمس", "شجرة"],
+        correctOption: "شاطئ",
+        imageName: "شاطئ"
     ),
     // الصاد
     "ص": StoryItem(
@@ -138,10 +138,10 @@ private let allStories: [String: StoryItem] = [
     ),
     // الطاء
     "ط": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["نمر", "طاؤوس", "أسد"],
-        correctOption: "طاؤوس",
-        imageName: "طاؤوس"
+        storyLine: "الطفل يلعب بـ",
+        options: ["طير", "طين", "طاولة"],
+        correctOption: "طين",
+        imageName: "طين"
     ),
     // الظاء
     "ظ": StoryItem(
@@ -159,10 +159,10 @@ private let allStories: [String: StoryItem] = [
     ),
     // الغين
     "غ": StoryItem(
-        storyLine: "أحمد نظر إلى السماء فشاهد",
-        options: ["غيمة", "غراب", "غطاء"],
-        correctOption: "غيمة",
-        imageName: "غيمة"
+        storyLine: "أحمد دخل إلى",
+        options: ["غرفة", "غيمة", "غراب"],
+        correctOption: "غرفة",
+        imageName: "غرفة"
     ),
     // الفاء
     "ف": StoryItem(
@@ -173,10 +173,10 @@ private let allStories: [String: StoryItem] = [
     ),
     // القاف
     "ق": StoryItem(
-        storyLine: "أحمد نظر إلى السماء فرأى",
-        options: ["قمر", "قلم", "قطة"],
-        correctOption: "قمر",
-        imageName: "قمر"
+        storyLine: "كتب مشعل الواجب باستخدام",
+        options:["دفتر","قلم","مسطرة"],
+        correctOption: "قلم",
+        imageName: "قلم"
     ),
     // الكاف
     "ك": StoryItem(
