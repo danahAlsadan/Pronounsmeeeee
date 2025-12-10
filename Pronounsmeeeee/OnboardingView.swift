@@ -16,6 +16,8 @@ struct OnboardingView: View {
         !childName.trimmingCharacters(in: .whitespaces).isEmpty &&
         selectedGender != nil
     }
+    var onFinish: (() -> Void)? = nil//wed
+
     
     var body: some View {
         NavigationStack {
@@ -77,10 +79,14 @@ struct OnboardingView: View {
                     // MARK: - زر Let’s Practice
                     if canProceed {
                         Button {
+                            //wed
                             saveUserData()
-                            navigateToHome = true
+                               UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
+                               onFinish?()        // ← يعلم الـ Rootview إنه خلص
+                               navigateToHome = true
+                            //wed
                         } label: {
-                            Text("Let's Practice")
+                            Text("بدأ")
                                 .font(.system(size: 26, weight: .bold))
                                 .foregroundColor(accentColor)
                                 .padding(.horizontal, 50)
@@ -141,7 +147,7 @@ struct OnboardingView: View {
                         .shadow(color: isSelected ? accentColor.opacity(0.4) : .clear,
                                 radius: 8, y: 4)
                     
-                    Text(type == .boy ? "Boy" : "Girl")
+                    Text(type == .boy ? "ولد" : "بنت")
                         .font(.system(size: 30, weight: .bold))
                         .foregroundColor(accentColor)
                 }

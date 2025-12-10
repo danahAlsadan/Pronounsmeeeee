@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationStack {
-            RootView()
+            RecorderView(sentences: ["باب", "برتقال", "بطة"])
 //                .navigationTitle("الرئيسية")
         }
     }
@@ -18,6 +18,6 @@ struct ContentView: View {
 
 #Preview {
 //    NavigationStack {
-        RootView()
+    RecorderView(sentences: ["باب", "برتقال", "بطة"])
 //    }
 }

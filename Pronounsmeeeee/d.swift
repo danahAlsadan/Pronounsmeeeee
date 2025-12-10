@@ -17,6 +17,11 @@ struct d: View {
 }
 
 struct MenuView: View {
+//    let selectedLetter: String  // إذا عندك هذا المتغير
+
+        var completedSentences: Int {
+            UserDefaults.standard.integer(forKey: "progress_\(selectedLetter)")
+        }
     
     // ✅ إضافة 1: تخزين الحرف المختار في AppStorage بنفس المفتاح المستخدم في AnimalQuizView
     @AppStorage("selectedLetter") private var selectedLetter: String = "أ"

@@ -25,6 +25,10 @@ struct RecorderView: View {
     @State private var resultMessage = ""
     @State private var showNextButton = false
     
+    // تقدم الجمل في هذه الجلسة
+    private var completedSentences: Int { currentIndex }
+    private var totalSentences: Int { sentences.count }
+    
     var targetWord: String {
         sentences[currentIndex]
     }
@@ -45,49 +49,107 @@ struct RecorderView: View {
             }
             .hidden()
 
-            VStack(spacing: 40) {
+            VStack(spacing: 30) {
                 
                 Spacer()
-                
+//                Text( "اقراء التالي :")
+//                .foregroundColor(.gray)
+
+
                 //المربع الأبيض للكلمة
                 RoundedRectangle(cornerRadius: 30)
                     .fill(Color.white.opacity(0.85))
-                    .frame(width: 300, height: 120)
+                    .frame(width: 350, height: 520)
                     .opacity(0.60)
                     .shadow(color: .black.opacity(0.15), radius: 6, y: 4)
 
+                
                     .overlay(
-                        Text(targetWord)
-                            .font(.system(size: 32, weight: .bold))
-                            .foregroundColor(.gray)
+                        VStack(spacing: 20) {
                             
+                            Text("اقرأ التالي :")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 20, weight: .medium))
+
+                            Text(targetWord)
+                                .font(.system(size: 32, weight: .bold))
+                                .foregroundColor(.gray)
+                            
+                            
+                           
+                            
+                            
+                            Button(action: {
+                                toggleRecording()
+                            }) {
+                                Image(systemName: isRecording ? "mic.fill" : "mic.slash.fill")
+                                    .font(.system(size: 70))
+                                    .foregroundColor(.white)
+                                    .frame(width: 150, height: 150)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 30)
+                                            .fill(Color(hex: "f6b922").opacity(0.90))
+                                    )
+                                    .shadow(color: .black.opacity(0.25), radius: 8, y: 5)
+                            }
+                            
+                            //  النتيجة
+                            Text(resultMessage)
+                                .font(.system(size: 40))
+                                .foregroundColor(.gray)
+
+                            
+                            
+                            
+                            
+                            Text("انت قلت:")
+                            .foregroundColor(.gray)
+
+                            Text(recognizer.transcript)
+                                .foregroundColor(.gray)
+                            
+                            
+                            Text("\(completedSentences)/\(totalSentences)")
+                                .font(.title3)
+                                .foregroundColor(.gray)
+                                .offset(y: 30)
+
+                        }
                     )
+
+//                Text("\(completedSentences)/\(totalSentences)")
+//                    .font(.title3)
+//                    .foregroundColor(.gray)
+
                 
-                
-                Button(action: {
-                    toggleRecording()
-                }) {
-                    Image(systemName: isRecording ? "mic.fill" : "mic.slash.fill")
-                        .font(.system(size: 70))
-                        .foregroundColor(.white)
-                        .frame(width: 150, height: 150)
-                        .background(
-                            RoundedRectangle(cornerRadius: 30)
-                                .fill(Color(hex: "f6b922").opacity(0.90))
-                        )
-                        .shadow(color: .black.opacity(0.25), radius: 8, y: 5)
-                }
-                
-                //  النتيجة
-                Text(resultMessage)
-                    .font(.system(size: 40))
-                
-                
-                
-                
-                Text("انت قلت:")
-                Text(recognizer.transcript)
-                    .foregroundColor(.gray)
+//                Button(action: {
+//                    toggleRecording()
+//                }) {
+//                    Image(systemName: isRecording ? "mic.fill" : "mic.slash.fill")
+//                        .font(.system(size: 70))
+//                        .foregroundColor(.white)
+//                        .frame(width: 150, height: 150)
+//                        .background(
+//                            RoundedRectangle(cornerRadius: 30)
+//                                .fill(Color(hex: "f6b922").opacity(0.90))
+//                        )
+//                        .shadow(color: .black.opacity(0.25), radius: 8, y: 5)
+//                }
+//                
+//                //  النتيجة
+//                Text(resultMessage)
+//                    .font(.system(size: 40))
+//                    .foregroundColor(.gray)
+//
+//                
+//                
+//                
+//                
+//                Text("انت قلت:")
+//                .foregroundColor(.gray)
+//
+//                Text(recognizer.transcript)
+//                    .foregroundColor(.gray)
              
                 
                 // زر التالي
@@ -119,16 +181,16 @@ struct RecorderView: View {
                             .cornerRadius(25)
                     }
                 }
-                Button(action: {
-                    goToStory = true
-                    }) {
-                        Text("القصة (مؤقت)")
-                            .font(.title3)
-                            .foregroundColor(.white)
-                            .frame(width: 200, height: 42)
-                            .background(Color.blue.opacity(0.8))
-                            .cornerRadius(25)
-                    }
+//                Button(action: {
+//                    goToStory = true
+//                    }) {
+//                        Text("القصة (مؤقت)")
+//                            .font(.title3)
+//                            .foregroundColor(.white)
+//                            .frame(width: 200, height: 42)
+//                            .background(Color.blue.opacity(0.8))
+//                            .cornerRadius(25)
+//                    }
 
                 Spacer()
             }
@@ -211,6 +273,10 @@ struct RecorderView: View {
             resultMessage = ""
             showNextButton = false
             isRecording = false
+            
+            
+            UserDefaults.standard.set(currentIndex + 1, forKey: "progress_\(selectedLetter)")
+
         } else {
 //            resultMessage = "👏 خلصت كل الجمل!"
 //            showNextButton = false
@@ -241,7 +307,5 @@ extension Color {
 
 
 #Preview {
-    RecorderView(sentences: ["باب", "برتقال", "بطة"])
+    RecorderView(sentences: ["باب", "برتقال", "بطة",])
 }
-
-
