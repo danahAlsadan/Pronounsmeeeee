@@ -10,14 +10,14 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationStack {
-            AnimalQuizView()
-                .navigationTitle("الرئيسية")
+            RootView()
+//                .navigationTitle("الرئيسية")
         }
     }
 }
 
 #Preview {
-    NavigationStack {
-        AnimalQuizView()
-    }
+//    NavigationStack {
+        RootView()
+//    }
 }
