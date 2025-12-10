@@ -30,7 +30,7 @@ struct StarJarView: View {
     var body: some View {
         ZStack {
             // الخلفية
-            Image("خلفية الجار")
+            Image("خلفيتي")
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
@@ -53,6 +53,13 @@ struct StarJarView: View {
                     jarStarsLayer
                 }
                 .frame(width: 400, height: 460)
+                .padding(.vertical, 3)
+                .padding(.horizontal, 6)
+                .frame(maxWidth: 360)
+                .background(
+                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        .fill(Color.white)
+                )
 
                 Spacer()
             }
@@ -94,7 +101,7 @@ struct StarJarView: View {
                     Image("نجمه")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 50, height: 50)
+                        .frame(width: 80, height: 80)
                         .position(pos)
                 }
             }
