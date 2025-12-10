@@ -34,196 +34,196 @@ private let allStories: [String: StoryItem] = [
     // الألف
     "أ": StoryItem(
         storyLine: "ذهب احمد الى حديقة الحيوان ورأى",
-        options: ["أسد" ,"ثعلب", "جمل"],
+        options: ["أ سد" ,"ث ـعلب", "ج ـمل"],
         correctOption: "أسد",
         imageName: "أسد"
     ),
     // الباء
     "ب": StoryItem(
         storyLine:"ذهب احمد الى الحديقة ورأى",
-        options: ["بطة", "فيل", "تمساح"],
+        options: ["ب ـطة", "ف ـيل", "ت ـمساح"],
         correctOption: "بطة",
         imageName: "بطة"
     ),
     // التاء
     "ت": StoryItem(
         storyLine:"لبست الأميره",
-        options: ["حقيبة","فستان","تاج"],
+        options: ["ح ـقيبة","ف ـستان","ت ـاج"],
         correctOption: "تاج",
         imageName: "تاج"
     ),
     // الثاء
     "ث": StoryItem(
         storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["ثعلب", "قرد", "صقر"],
+        options: ["ث ـعلب", "ق ـرد", "ص ـقر"],
         correctOption: "ثعلب",
         imageName: "ثعلب"
     ),
     // الجيم
     "ج": StoryItem(
         storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["لبوه", "عصفور", "جمل"],
+        options: ["ل ـبوه", "ع ـصفور", "ج ـمل"],
         correctOption: "جمل",
         imageName: "جمل"
     ),
     // الحاء
     "ح": StoryItem(
         storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["زرافه", "حصان", "ذئب"],
+        options: ["ز رافه", "ح ـصان", "ذ ئب"],
         correctOption: "حصان",
         imageName: "حصان"
     ),
     // الخاء
     "خ": StoryItem(
         storyLine: "أكلت دانه",
-        options: ["خيار", "نحل", "صقر"],
+        options: ["خ ـيار", "ج زر", "خ ـس"],
         correctOption: "خيار",
         imageName: "خيار"
     ),
     // الدال
     "د": StoryItem(
         storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["نمر", "دب", "يمامه"],
+        options: ["ن ـمر", "دب", "ي ـمامه"],
         correctOption: "دب",
         imageName: "دب"
     ),
     // الذال
     "ذ": StoryItem(
         storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["ذئب", "بطة", "سمكة"],
+        options: ["ذ ئب", "ب ـطة", "س ـمكة"],
         correctOption: "ذئب",
         imageName: "ذئب"
     ),
     // الراء
     "ر": StoryItem(
         storyLine: "أرسل أحمد",
-        options: ["رسالة", "رمان", "رمل"],
+        options: ["ر سالة", "واجب", "و رقة"],
         correctOption: "رسالة",
         imageName: "رسالة"
     ),
     // الزاي
     "ز": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["زرافة", "غوريلا", "عصفور"],
+        storyLine: "ذهب خالد الى الحديقة ورأى",
+        options: ["ز رافة", "غ ـوريلا", "ع ـصفور"],
         correctOption: "زرافة",
         imageName: "زرافة"
     ),
     // السين
     "س": StoryItem(
-        storyLine: "شاهد أحمد في البحر",
-        options: ["كلب", "غزال", "سفينة"],
+        storyLine: "شاهدت يارا في البحر",
+        options: ["سـ مكة", "س ـلحفاة", "س ـفينة"],
         correctOption: "سفينة",
         imageName: "سفينة"
     ),
     // الشين
     "ش": StoryItem(
-        storyLine: "ذهب أحمد إلى",
-        options: ["شاطئ", "شمس", "شجرة"],
+        storyLine: "ذهبت ود إلى",
+        options: ["ش ـاطئ", "حـ ديقة", "م درسة"],
         correctOption: "شاطئ",
         imageName: "شاطئ"
     ),
     // الصاد
     "ص": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["صقر", "ظبي", "ماعز"],
+        storyLine: "ذهب محمد الى الحديقة ورأى",
+        options: ["ص ـقر", "ظ ـبي", "م ـاعز"],
         correctOption: "صقر",
         imageName: "صقر"
     ),
     // الضاد
     "ض": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["كلب", "ثور", "ضفدع"],
+        storyLine: "ذهبت حنين الى الحديقة ورأت",
+        options: ["ك ـلب", "ث ـور", "ض ـفدع"],
         correctOption: "ضفدع",
         imageName: "ضفدع"
     ),
     // الطاء
     "ط": StoryItem(
         storyLine: "الطفل يلعب بـ",
-        options: ["طير", "طين", "طاولة"],
+        options: ["ق ـلم", "ط ـين", "طاولة"],
         correctOption: "طين",
         imageName: "طين"
     ),
     // الظاء
     "ظ": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["غوريلا", "ظبي", "زرافة"],
+        storyLine: "ذهب محمد الى الحديقة ورأى",
+        options: ["غ ـوريلا", "ظ ـبي", "ز رافة"],
         correctOption: "ظبي",
         imageName: "ظبي"
     ),
     // العين
     "ع": StoryItem(
-        storyLine: "أحمد رأى في السماء",
+        storyLine: "لولو رأت في السماء",
         options: ["عصفور", "عين", "عنب"],
         correctOption: "عصفور",
         imageName: "عصفور"
     ),
     // الغين
     "غ": StoryItem(
-        storyLine: "أحمد دخل إلى",
-        options: ["غرفة", "غيمة", "غراب"],
+        storyLine: "يارا دخلت إلى",
+        options: ["غ ـرفة", "خ ـيمة", "ك ـهف"],
         correctOption: "غرفة",
         imageName: "غرفة"
     ),
     // الفاء
     "ف": StoryItem(
-        storyLine: "أحمد ذهب إلى الحديقة الكبيرة وشاهد",
-        options: ["فيل", "فأر", "فم"],
+        storyLine: "راكان ذهب إلى الحديقة الكبيرة وشاهد",
+        options: ["ف ـيل", "ف ـأر", "ف ـم"],
         correctOption: "فيل",
         imageName: "فيل"
     ),
     // القاف
     "ق": StoryItem(
         storyLine: "كتب مشعل الواجب باستخدام",
-        options:["دفتر","قلم","مسطرة"],
+        options:["د ـفتر","ق ـلم","م ـسطرة"],
         correctOption: "قلم",
         imageName: "قلم"
     ),
     // الكاف
     "ك": StoryItem(
         storyLine: "أحمد شرب الماء من",
-        options: ["كوب", "كتاب", "كرسي"],
+        options: ["ك ـوب", "م ـلعقة", "ص ـحن"],
         correctOption: "كوب",
         imageName: "كوب"
     ),
     // اللام
     "ل": StoryItem(
         storyLine: "أحمد لعب بـ",
-        options: ["لعبة", "لبن", "لؤلؤ"],
+        options: ["ل ـعبة", "د ـفتر", "ق ـلم"],
         correctOption: "لعبة",
         imageName: "لعبة"
     ),
     // الميم
     "م": StoryItem(
-        storyLine: "أحمد أكل",
-        options: ["موز", "ماء", "ملح"],
+        storyLine: "تركي أكل",
+        options: ["م ـوز", "م ـاء", "م ـلح"],
         correctOption: "موز",
         imageName: "موز"
     ),
     // النون
     "ن": StoryItem(
         storyLine: "أحمد شاهد في الغابة",
-        options: ["نمر", "نار", "نملة"],
+        options: ["ن ـمر", "ن ـار", "ن ـملة"],
         correctOption: "نمر",
         imageName: "نمر"
     ),
     // الهاء (هـ)
     "هـ": StoryItem(
-        storyLine: "أحمد رأى في السماء",
-        options: ["هلال", "هر", "هدهد"],
+        storyLine: "هياء رأت في السماء",
+        options: ["هـ ـلال", "ع ـصفور", "ي ـمامه"],
         correctOption: "هلال",
         imageName: "هلال"
     ),
     // الواو
     "و": StoryItem(
-        storyLine: "أحمد شم رائحة",
-        options: ["ورد", "وجه", "ورق"],
+        storyLine: "محمد شم رائحة",
+        options: ["و رد", "ح ـبر", "و رق"],
         correctOption: "ورد",
         imageName: "ورد"
     ),
     // الياء
     "ي": StoryItem(
-        storyLine: "أحمد رأى طائرًا جميلًا هو",
-        options: ["يمامة", "يد", "يوم"],
+        storyLine: "أحمد رأى طائرًا جميلًا وهو",
+        options: ["ي ـمامة", "هـ دهد", "ص ـقر"],
         correctOption: "يمامة",
         imageName: "يمامة"
     )
@@ -286,7 +286,7 @@ struct AnimalQuizView: View {
                     // نص القصة
                     VStack(spacing: 0) {
                         Text(item?.storyLine ?? "أحمد ذهب إلى الحديقة ورأى")
-                            .multilineTextAlignment(.center)
+                            .multilineTextAlignment(.trailing) // عربي RTL
                             .font(.system(size: 22, weight: .regular))
                             .foregroundColor(.black)
                         Text("............")
@@ -296,18 +296,11 @@ struct AnimalQuizView: View {
                     }
                     .padding(.top, 2)
 
-                    // الحروف الأولى الملوّنة (من الخيارات الحالية)
+                    // الحروف الأولى الملوّنة (من الخيارات الحالية) — بكلمة واحدة مع تلوين أول حرف
                     HStack(spacing: 20) {
                         ForEach((item?.options ?? []), id: \.self) { word in
-                            let first = String(word.prefix(1))
-                            let rest = String(word.dropFirst())
-                            HStack(spacing: 0) {
-                                Text(first)
-                                    .foregroundColor(.brown)
-                                Text(rest)
-                                    .foregroundColor(.black)
-                            }
-                            .font(.system(size: 24, weight: .regular))
+                            Text(coloredFirstLetter(in: word))
+                                .font(.system(size: 24, weight: .regular))
                         }
                     }
                     .padding(.horizontal, 12)
@@ -355,6 +348,7 @@ struct AnimalQuizView: View {
                 Spacer(minLength: 0)
             }
         }
+        .environment(\.layoutDirection, .rightToLeft) // جعل التخطيط RTL
         .alert("أحسنت!", isPresented: $showCorrectAlert) {
             Button("متابعة") {
                 goToJar = true
@@ -397,6 +391,16 @@ struct AnimalQuizView: View {
         }
         // بعد اختيار الصحيح، نوقف الأزرار الأخرى
         .disabled(isCorrect && title != item?.correctOption)
+    }
+
+    // MARK: - Arabic first-letter coloring without breaking shaping
+    private func coloredFirstLetter(in word: String) -> AttributedString {
+        var attr = AttributedString(word)
+        let start = attr.startIndex
+        if let next = attr.characters.index(start, offsetBy: 1, limitedBy: attr.endIndex) {
+            attr[start..<next].foregroundColor = .black
+        }
+        return attr
     }
 }
 
