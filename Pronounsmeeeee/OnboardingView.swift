@@ -1,8 +1,3 @@
-//
-//  OnboardingView.swift
-//  Pronounsmeeeee
-//
-
 import SwiftUI
 
 struct OnboardingView: View {
@@ -16,8 +11,7 @@ struct OnboardingView: View {
         !childName.trimmingCharacters(in: .whitespaces).isEmpty &&
         selectedGender != nil
     }
-    var onFinish: (() -> Void)? = nil//wed
-
+    var onFinish: (() -> Void)? = nil
     
     var body: some View {
         NavigationStack {
@@ -30,44 +24,42 @@ struct OnboardingView: View {
                 
                 VStack(spacing: 20) {
                     
-                    // MARK: - Hello + Name (متمركزة بالكامل بس نازلة شوي)
-                    VStack(spacing: 3) {
+                    // MARK: - Hello + Name (الاسم تحت Hello)
+                    VStack(spacing: 8) {
                         
-                        HStack(spacing: 10) {
-                            Text("Hello")
-                                .font(.system(size: 35, weight: .bold))
-                                .italic()
-                                .foregroundColor(accentColor)
-                            
-                            TextField("", text: $childName)
-                                .font(.system(size: 35, weight: .semibold))
-                                .italic()
-                                .foregroundColor(accentColor.opacity(0.85))
-                                .multilineTextAlignment(.center)
-                                .placeholder(when: childName.isEmpty) {
-                                    Text("Name")
-                                        .font(.system(size: 35, weight: .semibold))
-                                        .italic()
-                                        .foregroundColor(accentColor.opacity(0.50))
-                                }
-                                .frame(maxWidth: 120)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.horizontal)
-
+                        // Hello فوق
+                        Text("Hello")
+                            .font(.system(size: 40, weight: .bold))
+                            .italic()
+                            .foregroundColor(accentColor)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        
+                        // الاسم تحت Hello
+                        TextField("", text: $childName)
+                            .font(.system(size: 35, weight: .semibold))
+                            .italic()
+                            .foregroundColor(accentColor.opacity(0.85))
+                            .multilineTextAlignment(.center)
+                            .placeholder(when: childName.isEmpty) {
+                                Text("Name")
+                                    .font(.system(size: 40, weight: .semibold))
+                                    .italic()
+                                    .foregroundColor(accentColor.opacity(0.50))
+                            }
+                            .frame(maxWidth: 115) // عرض معقول تحت Hello
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        
+                        // الخط تحت الاسم
                         Rectangle()
                             .fill(accentColor.opacity(0.4))
-                            .frame(width: 250, height: 3)
+                            .frame(width: 150, height: 3)
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
-                    // ✳️ نزّلته أكثر تحت
-                    .padding(.top, 180)   // جربي 140–160 لين يضبط معاك
+                    .padding(.top, 180)   // نزّلت الهيدر شوي تحت
                     
-                    // مسافة تحت الهيدر
                     Spacer().frame(height: 1)
                     
                     // MARK: - Boy / Girl
-                    // MARK: - Boy / Girl with stars
                     HStack(spacing: 20) {
                         genderColumn(type: .boy)
                         genderColumn(type: .girl)
@@ -76,15 +68,13 @@ struct OnboardingView: View {
                     
                     Spacer()
                     
-                    // MARK: - زر Let’s Practice
+                    // MARK: - زر "بدأ"
                     if canProceed {
                         Button {
-                            //wed
                             saveUserData()
-                               UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
-                               onFinish?()        // ← يعلم الـ Rootview إنه خلص
-                               navigateToHome = true
-                            //wed
+                            UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
+                            onFinish?()
+                            navigateToHome = true
                         } label: {
                             Text("بدأ")
                                 .font(.system(size: 26, weight: .bold))
@@ -106,23 +96,23 @@ struct OnboardingView: View {
                 }
                 .padding(.horizontal, 24)
             }
-            // *** هنا التنقّل حق الكود الأول بس ***
-                        .navigationDestination(isPresented: $navigateToHome) {
-                            HomePage(
-                                childName: childName,
-                                profileImage: selectedGender == .boy ? "Boy" : "Girl"
-                            )
-                        }
-                        .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $navigateToHome) {
+                HomePage(
+                    childName: childName,
+                    profileImage: selectedGender == .boy ? "Boy" : "Girl"
+                )
+            }
+            .navigationBarBackButtonHidden(true)
         }
-        // الكيبورد ما يلعب في الـ safe area من تحت
+        // الكيبورد ما يرفع المحتوى من تحت
         .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
-    // حفظ البيانات في UserDefaults
+    // حفظ البيانات
     private func saveUserData() {
         UserDefaults.standard.set(childName, forKey: "childName")
-        UserDefaults.standard.set(selectedGender == .boy ? "Boy" : "Girl", forKey: "profileImage")
+        UserDefaults.standard.set(selectedGender == .boy ? "Boy" : "Girl",
+                                  forKey: "profileImage")
     }
     
     // MARK: - عمود ولد/بنت
@@ -158,6 +148,7 @@ struct OnboardingView: View {
     }
 }
 
+// Gender enum
 enum Gender {
     case boy
     case girl
