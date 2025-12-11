@@ -20,7 +20,7 @@ struct SplashView: View {
             Image("SplashStar")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 320)          // اقدر اكبر و اصغر النجمة
+                .frame(width: 400, height: 800)          // اقدر اكبر و اصغر النجمة
                 .opacity(starOpacity)
                 .scaleEffect(starScale)
                 .offset(y: bounce ? -30 : 0) // حركة لطيفة فوق/تحت
