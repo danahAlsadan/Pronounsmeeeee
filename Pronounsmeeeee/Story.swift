@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+
+
+ 
+
+
+
 struct CurvedHeader: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
@@ -301,10 +307,10 @@ struct AnimalQuizView: View {
                         ForEach((item?.options ?? []), id: \.self) { word in
                             Text(coloredFirstLetter(in: word))
                                 .font(.system(size: 24, weight: .regular))
+                                .foregroundColor(.black)
                         }
                     }
                     .padding(.horizontal, 12)
-
                     // صورة الحيوان (اسمها = imageName)
                     if let imageName = item?.imageName {
                         Image(imageName)
