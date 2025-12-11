@@ -1,5 +1,5 @@
 import SwiftUI
-import ConfettiSwiftUI
+//import ConfettiSwiftUI
 
 struct RecorderView: View {
     @StateObject var recognizer = SpeechRecognizer()
@@ -196,7 +196,7 @@ struct RecorderView: View {
             }
             .padding(.bottom, 30)
             
-            ConfettiCannon(trigger: $confettiCounter)
+//            ConfettiCannon(trigger: $confettiCounter)
         }
     }
     
