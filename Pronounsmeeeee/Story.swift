@@ -64,7 +64,7 @@ private let allStories: [String: StoryItem] = [
         storyLine: "ذهب احمد الى الحديقة ورأى",
         options: ["لـبوه", "عـصفور", "جـمل"],
         correctOption: "جمل",
-        imageName: "جمل"
+        imageName:"جبل"
     ),
     // الحاء
     "ح": StoryItem(
@@ -218,7 +218,7 @@ private let allStories: [String: StoryItem] = [
         storyLine: "محمد شم رائحة",
         options: ["ورد", "حـبر", "ورق"],
         correctOption: "ورد",
-        imageName: "ورد"
+        imageName: "وردة"
     ),
     // الياء
     "ي": StoryItem(
