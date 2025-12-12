@@ -28,212 +28,212 @@ struct CurvedHeader: Shape {
 }
 
 // نموذج بيانات السؤال/القصة
-struct StoryItem {
-    let storyLine: String           // مثال: "أحمد ذهب إلى الحديقة ورأى"
-    let options: [String]           // 3 خيارات
-    let correctOption: String       // الصحيح
-    let imageName: String           // اسم الصورة في الأصول (عادة = correctOption)
-}
+//struct StoryItem {
+//    let storyLine: String           // مثال: "أحمد ذهب إلى الحديقة ورأى"
+//    let options: [String]           // 3 خيارات
+//    let correctOption: String       // الصحيح
+//    let imageName: String           // اسم الصورة في الأصول (عادة = correctOption)
+//}
 
 // قاعدة بيانات القصص المخصصة لكل حرف (أكملي بقية الحروف بنفس النمط)
-private let allStories: [String: StoryItem] = [
-    // الألف
-    "أ": StoryItem(
-        storyLine: "ذهب احمد الى حديقة الحيوان ورأى",
-        options: ["أسد" ,"ثـعلب", "جـمل"],
-        correctOption: "أسد",
-        imageName: "أسد"
-    ),
-    // الباء
-    "ب": StoryItem(
-        storyLine:"ذهب احمد الى الحديقة ورأى",
-        options: ["بـطة", "فـيل", "تـمساح"],
-        correctOption: "بطة",
-        imageName: "بطة"
-    ),
-    // التاء
-    "ت": StoryItem(
-        storyLine:"لبست الأميره",
-        options: ["حـقيبة","فـستان","تـاج"],
-        correctOption: "تاج",
-        imageName: "تاج"
-    ),
-    // الثاء
-    "ث": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["ثـعلب", "قـرد", "صـقر"],
-        correctOption: "ثعلب",
-        imageName: "ثعلب"
-    ),
-    // الجيم
-    "ج": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["لـبوه", "عـصفور", "جـمل"],
-        correctOption: "جمل",
-        imageName:"جبل"
-    ),
-    // الحاء
-    "ح": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["ز رافه", "ح ـصان", "ذ ئب"],
-        correctOption: "حصان",
-        imageName: "حصان"
-    ),
-    // الخاء
-    "خ": StoryItem(
-        storyLine: "أكلت دانه",
-        options: ["خـيار", "جزر", "خـس"],
-        correctOption: "خيار",
-        imageName: "خيار"
-    ),
-    // الدال
-    "د": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["نـمر", "دب", "يـمامه"],
-        correctOption: "دب",
-        imageName: "دب"
-    ),
-    // الذال
-    "ذ": StoryItem(
-        storyLine: "ذهب احمد الى الحديقة ورأى",
-        options: ["ذئب", "بـطة", "سـمكة"],
-        correctOption: "ذئب",
-        imageName: "ذئب"
-    ),
-    // الراء
-    "ر": StoryItem(
-        storyLine: "أرسل أحمد",
-        options: ["رسالة", "واجب", "ورقة"],
-        correctOption: "رسالة",
-        imageName: "رسالة"
-    ),
-    // الزاي
-    "ز": StoryItem(
-        storyLine: "ذهب خالد الى الحديقة ورأى",
-        options: ["زرافة", "غـوريلا", "عـصفور"],
-        correctOption: "زرافة",
-        imageName: "زرافة"
-    ),
-    // السين
-    "س": StoryItem(
-        storyLine: "شاهدت يارا في البحر",
-        options: ["سـمكة", "سـلحفاة", "سـفينة"],
-        correctOption: "سفينة",
-        imageName: "سفينة"
-    ),
-    // الشين
-    "ش": StoryItem(
-        storyLine: "ذهبت ود إلى",
-        options: ["شـاطئ", "حـديقة", "مدرسة"],
-        correctOption: "شاطئ",
-        imageName: "شاطئ"
-    ),
-    // الصاد
-    "ص": StoryItem(
-        storyLine: "ذهب محمد الى الحديقة ورأى",
-        options: ["صـقر", "ظـبي", "مـاعز"],
-        correctOption: "صقر",
-        imageName: "صقر"
-    ),
-    // الضاد
-    "ض": StoryItem(
-        storyLine: "ذهبت حنين الى الحديقة ورأت",
-        options: ["كـلب", "ثـور", "ضـفدع"],
-        correctOption: "ضفدع",
-        imageName: "ضفدع"
-    ),
-    // الطاء
-    "ط": StoryItem(
-        storyLine: "الطفل يلعب بـ",
-        options: ["قـلم", "طـين", "طاولة"],
-        correctOption: "طين",
-        imageName: "طين"
-    ),
-    // الظاء
-    "ظ": StoryItem(
-        storyLine: "ذهب محمد الى الحديقة ورأى",
-        options: ["غـوريلا", "ظـبي", "زرافة"],
-        correctOption: "ظبي",
-        imageName: "ظبي"
-    ),
-    // العين
-    "ع": StoryItem(
-        storyLine: "لولو رأت في السماء",
-        options: ["عصفور", "عين", "عنب"],
-        correctOption: "عصفور",
-        imageName: "عصفور"
-    ),
-    // الغين
-    "غ": StoryItem(
-        storyLine: "يارا دخلت إلى",
-        options: ["غـرفة", "خـيمة", "كـهف"],
-        correctOption: "غرفة",
-        imageName: "غرفة"
-    ),
-    // الفاء
-    "ف": StoryItem(
-        storyLine: "راكان ذهب إلى الحديقة الكبيرة وشاهد",
-        options: ["فـيل", "قـطة", "كلب"],
-        correctOption: "فيل",
-        imageName: "فيل"
-    ),
-    // القاف
-    "ق": StoryItem(
-        storyLine: "كتب مشعل الواجب باستخدام",
-        options:["دفتر","قـلم","مـسطرة"],
-        correctOption: "قلم",
-        imageName: "قلم"
-    ),
-    // الكاف
-    "ك": StoryItem(
-        storyLine: "أحمد شرب الماء من",
-        options: ["كـوب", "مـلعقة", "صـحن"],
-        correctOption: "كوب",
-        imageName: "كوب"
-    ),
-    // اللام
-    "ل": StoryItem(
-        storyLine: "أحمد لعب بـ",
-        options: ["لـعبة", "دفتر", "قـلم"],
-        correctOption: "لعبة",
-        imageName: "لعبة"
-    ),
-    // الميم
-    "م": StoryItem(
-        storyLine: "تركي أكل",
-        options: ["مـوز", "مـاء", "مـلح"],
-        correctOption: "موز",
-        imageName: "موز"
-    ),
-    // النون
-    "ن": StoryItem(
-        storyLine: "أحمد شاهد في الغابة",
-        options: ["نـمر", "نـار", "نـملة"],
-        correctOption: "نمر",
-        imageName: "نمر"
-    ),
-    // الهاء (هـ)
-    "هـ": StoryItem(
-        storyLine: "هياء رأت في السماء",
-        options: ["هــلال", "عـصفور", "يـمامه"],
-        correctOption: "هلال",
-        imageName: "هلال"
-    ),
-    // الواو
-    "و": StoryItem(
-        storyLine: "محمد شم رائحة",
-        options: ["ورد", "حـبر", "ورق"],
-        correctOption: "ورد",
-        imageName: "وردة"
-    ),
-    // الياء
-    "ي": StoryItem(
-        storyLine: "أحمد رأى طائرًا جميلًا وهو",
-        options: ["يـمامة", "هـدهد", "صـقر"],
-        correctOption: "يمامة",
-        imageName: "يمامة"
-    )
-]
+//private let allStories: [String: StoryItem] = [
+//    // الألف
+//    "أ": StoryItem(
+//        storyLine: "ذهب احمد الى حديقة الحيوان ورأى",
+//        options: ["أسد" ,"ثـعلب", "جـمل"],
+//        correctOption: "أسد",
+//        imageName: "أسد"
+//    ),
+//    // الباء
+//    "ب": StoryItem(
+//        storyLine:"ذهب احمد الى الحديقة ورأى",
+//        options: ["بـطة", "فـيل", "تـمساح"],
+//        correctOption: "بطة",
+//        imageName: "بطة"
+//    ),
+//    // التاء
+//    "ت": StoryItem(
+//        storyLine:"لبست الأميره",
+//        options: ["حـقيبة","فـستان","تـاج"],
+//        correctOption: "تاج",
+//        imageName: "تاج"
+//    ),
+//    // الثاء
+//    "ث": StoryItem(
+//        storyLine: "ذهب احمد الى الحديقة ورأى",
+//        options: ["ثـعلب", "قـرد", "صـقر"],
+//        correctOption: "ثعلب",
+//        imageName: "ثعلب"
+//    ),
+//    // الجيم
+//    "ج": StoryItem(
+//        storyLine: "ذهب احمد الى الحديقة ورأى",
+//        options: ["لـبوه", "عـصفور", "جـمل"],
+//        correctOption: "جمل",
+//        imageName:"جبل"
+//    ),
+//    // الحاء
+//    "ح": StoryItem(
+//        storyLine: "ذهب احمد الى الحديقة ورأى",
+//        options: ["ز رافه", "ح ـصان", "ذ ئب"],
+//        correctOption: "حصان",
+//        imageName: "حصان"
+//    ),
+//    // الخاء
+//    "خ": StoryItem(
+//        storyLine: "أكلت دانه",
+//        options: ["خـيار", "جزر", "خـس"],
+//        correctOption: "خيار",
+//        imageName: "خيار"
+//    ),
+//    // الدال
+//    "د": StoryItem(
+//        storyLine: "ذهب احمد الى الحديقة ورأى",
+//        options: ["نـمر", "دب", "يـمامه"],
+//        correctOption: "دب",
+//        imageName: "دب"
+//    ),
+//    // الذال
+//    "ذ": StoryItem(
+//        storyLine: "ذهب احمد الى الحديقة ورأى",
+//        options: ["ذئب", "بـطة", "سـمكة"],
+//        correctOption: "ذئب",
+//        imageName: "ذئب"
+//    ),
+//    // الراء
+//    "ر": StoryItem(
+//        storyLine: "أرسل أحمد",
+//        options: ["رسالة", "واجب", "ورقة"],
+//        correctOption: "رسالة",
+//        imageName: "رسالة"
+//    ),
+//    // الزاي
+//    "ز": StoryItem(
+//        storyLine: "ذهب خالد الى الحديقة ورأى",
+//        options: ["زرافة", "غـوريلا", "عـصفور"],
+//        correctOption: "زرافة",
+//        imageName: "زرافة"
+//    ),
+//    // السين
+//    "س": StoryItem(
+//        storyLine: "شاهدت يارا في البحر",
+//        options: ["سـمكة", "سـلحفاة", "سـفينة"],
+//        correctOption: "سفينة",
+//        imageName: "سفينة"
+//    ),
+//    // الشين
+//    "ش": StoryItem(
+//        storyLine: "ذهبت ود إلى",
+//        options: ["شـاطئ", "حـديقة", "مدرسة"],
+//        correctOption: "شاطئ",
+//        imageName: "شاطئ"
+//    ),
+//    // الصاد
+//    "ص": StoryItem(
+//        storyLine: "ذهب محمد الى الحديقة ورأى",
+//        options: ["صـقر", "ظـبي", "مـاعز"],
+//        correctOption: "صقر",
+//        imageName: "صقر"
+//    ),
+//    // الضاد
+//    "ض": StoryItem(
+//        storyLine: "ذهبت حنين الى الحديقة ورأت",
+//        options: ["كـلب", "ثـور", "ضـفدع"],
+//        correctOption: "ضفدع",
+//        imageName: "ضفدع"
+//    ),
+//    // الطاء
+//    "ط": StoryItem(
+//        storyLine: "الطفل يلعب بـ",
+//        options: ["قـلم", "طـين", "طاولة"],
+//        correctOption: "طين",
+//        imageName: "طين"
+//    ),
+//    // الظاء
+//    "ظ": StoryItem(
+//        storyLine: "ذهب محمد الى الحديقة ورأى",
+//        options: ["غـوريلا", "ظـبي", "زرافة"],
+//        correctOption: "ظبي",
+//        imageName: "ظبي"
+//    ),
+//    // العين
+//    "ع": StoryItem(
+//        storyLine: "لولو رأت في السماء",
+//        options: ["عصفور", "عين", "عنب"],
+//        correctOption: "عصفور",
+//        imageName: "عصفور"
+//    ),
+//    // الغين
+//    "غ": StoryItem(
+//        storyLine: "يارا دخلت إلى",
+//        options: ["غـرفة", "خـيمة", "كـهف"],
+//        correctOption: "غرفة",
+//        imageName: "غرفة"
+//    ),
+//    // الفاء
+//    "ف": StoryItem(
+//        storyLine: "راكان ذهب إلى الحديقة الكبيرة وشاهد",
+//        options: ["فـيل", "قـطة", "كلب"],
+//        correctOption: "فيل",
+//        imageName: "فيل"
+//    ),
+//    // القاف
+//    "ق": StoryItem(
+//        storyLine: "كتب مشعل الواجب باستخدام",
+//        options:["دفتر","قـلم","مـسطرة"],
+//        correctOption: "قلم",
+//        imageName: "قلم"
+//    ),
+//    // الكاف
+//    "ك": StoryItem(
+//        storyLine: "أحمد شرب الماء من",
+//        options: ["كـوب", "مـلعقة", "صـحن"],
+//        correctOption: "كوب",
+//        imageName: "كوب"
+//    ),
+//    // اللام
+//    "ل": StoryItem(
+//        storyLine: "أحمد لعب بـ",
+//        options: ["لـعبة", "دفتر", "قـلم"],
+//        correctOption: "لعبة",
+//        imageName: "لعبة"
+//    ),
+//    // الميم
+//    "م": StoryItem(
+//        storyLine: "تركي أكل",
+//        options: ["مـوز", "مـاء", "مـلح"],
+//        correctOption: "موز",
+//        imageName: "موز"
+//    ),
+//    // النون
+//    "ن": StoryItem(
+//        storyLine: "أحمد شاهد في الغابة",
+//        options: ["نـمر", "نـار", "نـملة"],
+//        correctOption: "نمر",
+//        imageName: "نمر"
+//    ),
+//    // الهاء (هـ)
+//    "هـ": StoryItem(
+//        storyLine: "هياء رأت في السماء",
+//        options: ["هــلال", "عـصفور", "يـمامه"],
+//        correctOption: "هلال",
+//        imageName: "هلال"
+//    ),
+//    // الواو
+//    "و": StoryItem(
+//        storyLine: "محمد شم رائحة",
+//        options: ["ورد", "حـبر", "ورق"],
+//        correctOption: "ورد",
+//        imageName: "وردة"
+//    ),
+//    // الياء
+//    "ي": StoryItem(
+//        storyLine: "أحمد رأى طائرًا جميلًا وهو",
+//        options: ["يـمامة", "هـدهد", "صـقر"],
+//        correctOption: "يمامة",
+//        imageName: "يمامة"
+//    )
+//]
 
 struct AnimalQuizView: View {
     // نقرأ الحرف المختار من d عبر AppStorage (UserDefaults)
