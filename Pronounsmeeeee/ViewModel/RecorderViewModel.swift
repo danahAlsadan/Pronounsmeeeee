@@ -78,6 +78,8 @@ final class RecorderViewModel: ObservableObject {
 
     func nextOrFinish() {
         if currentIndex == sentences.count - 1 {
+            // ✅ هنا: عند إنهاء كل الجمل، نعلم الكالندر
+            markTodayAsCompleted()
             goToStory = true
         } else {
             nextSentence()
@@ -95,6 +97,23 @@ final class RecorderViewModel: ObservableObject {
             UserDefaults.standard.set(currentIndex + 1, forKey: "progress_\(selectedLetter)")
         } else {
             showNextButton = true
+        }
+    }
+    
+    // ✅ Function جديدة: تعليم اليوم كمنجز
+    private func markTodayAsCompleted() {
+        let today = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let dateStr = formatter.string(from: today)
+        
+        // جلب التواريخ المحفوظة
+        var dates = UserDefaults.standard.array(forKey: "completedDatesKey") as? [String] ?? []
+        
+        // إضافة اليوم إذا مو موجود
+        if !dates.contains(dateStr) {
+            dates.append(dateStr)
+            UserDefaults.standard.set(dates, forKey: "completedDatesKey")
         }
     }
 }

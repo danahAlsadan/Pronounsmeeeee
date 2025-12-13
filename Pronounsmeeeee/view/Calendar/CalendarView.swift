@@ -1,4 +1,3 @@
-
 //
 //  CalendarView.swift
 //  Pronounsmeeeee
@@ -7,11 +6,12 @@
 import SwiftUI
 
 struct CalendarView: View {
-    @State private var currentMonth = Date()
+    @StateObject private var viewModel = CalendarViewModel()
+    @State private var showStreakPopup = false
     
     var onDismiss: () -> Void = {}
     
-    private let weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    private let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     
     var body: some View {
         ZStack {
@@ -29,7 +29,7 @@ struct CalendarView: View {
 //                            .font(.system(size: 32))
 //                            .foregroundColor(.gray)
 //                    }
-//                    
+//
 //                    Spacer()
                 }
                 .padding(.horizontal, 24)
@@ -38,7 +38,7 @@ struct CalendarView: View {
                 
                 HStack(spacing: 20) {
                     Button {
-                        moveMonth(by: -1)
+                        viewModel.moveMonth(by: -1)
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 24))
@@ -48,13 +48,13 @@ struct CalendarView: View {
                             .clipShape(Circle())
                     }
                     
-                    Text(getMonthYear())
+                    Text(viewModel.getMonthYear())
                         .font(.system(size: 26, weight: .bold))
                         .foregroundColor(.orange)
                         .frame(minWidth: 180)
                     
                     Button {
-                        moveMonth(by: 1)
+                        viewModel.moveMonth(by: 1)
                     } label: {
                         Image(systemName: "chevron.right")
                             .font(.system(size: 24))
@@ -79,13 +79,15 @@ struct CalendarView: View {
                 
                 ScrollView {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 7) {
-                        ForEach(getDaysArray(), id: \.self) { dayInfo in
+                        ForEach(viewModel.getDaysArray(), id: \.self) { dayInfo in
                             if let dayInfo = dayInfo {
                                 DayCell(
                                     day: dayInfo.day,
                                     isToday: dayInfo.isToday,
                                     isPast: dayInfo.isPast,
-                                    isFuture: dayInfo.isFuture
+                                    isFuture: dayInfo.isFuture,
+                                    isCompleted: viewModel.isDateCompleted(day: dayInfo.day),
+                                    isPartOfStreak: viewModel.isPartOfStreak(day: dayInfo.day)
                                 )
                             } else {
                                 Color.clear.frame(height: 69)
@@ -96,61 +98,79 @@ struct CalendarView: View {
                     .padding(.bottom, 30)
                 }
             }
-        }
-    }
-    
-    func getMonthYear() -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US")
-        formatter.dateFormat = "MMM yyyy"
-        return formatter.string(from: currentMonth)
-    }
-    
-    func moveMonth(by value: Int) {
-        if let newDate = Calendar.current.date(byAdding: .month, value: value, to: currentMonth) {
-            currentMonth = newDate
-        }
-    }
-    
-    func getDaysArray() -> [DayInfo?] {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        
-        guard let interval = calendar.dateInterval(of: .month, for: currentMonth),
-              let weekday = calendar.dateComponents([.weekday], from: interval.start).weekday,
-              let daysCount = calendar.range(of: .day, in: .month, for: currentMonth)?.count else {
-            return []
-        }
-        
-        let offset = weekday == 1 ? 6 : weekday - 2
-        var result: [DayInfo?] = Array(repeating: nil, count: offset)
-        
-        for day in 1...daysCount {
-            if let date = calendar.date(bySetting: .day, value: day, of: currentMonth) {
-                let dayDate = calendar.startOfDay(for: date)
-                
-                let isToday = dayDate == today
-                let isPast = dayDate < today
-                let isFuture = dayDate > today
-                
-                result.append(DayInfo(
-                    day: day,
-                    isToday: isToday,
-                    isPast: isPast,
-                    isFuture: isFuture
-                ))
+            
+            // Pop-up للـ Streak - مربع
+            if showStreakPopup && viewModel.currentStreak >= 3 {
+                ZStack {
+                    Color.black.opacity(0.3)
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            withAnimation {
+                                showStreakPopup = false
+                            }
+                        }
+                    
+                    VStack(spacing: 15) {
+                        Image(systemName: "flame.fill")
+                            .font(.system(size: 50))
+                            .foregroundColor(.orange)
+                            .symbolEffect(.pulse)
+                        
+                        Text("\(viewModel.currentStreak)")
+                            .font(.system(size: 60, weight: .bold))
+                            .foregroundColor(.orange)
+                        
+                        Text("أيام متتالية!")
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(.orange)
+                        
+                        Text("استمر في التمرين 💪")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundColor(.gray)
+                            .padding(.bottom, 5)
+                        
+                        Button {
+                            withAnimation {
+                                showStreakPopup = false
+                            }
+                        } label: {
+                            Text("رائع!")
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 12)
+                                .background(
+                                    Capsule()
+                                        .fill(Color.orange)
+                                )
+                        }
+                    }
+                    .padding(30)
+                    .frame(width: 280, height: 280)
+                    .background(
+                        RoundedRectangle(cornerRadius: 25)
+                            .fill(Color.white)
+                            .shadow(radius: 20)
+                    )
+                }
+                .transition(.scale.combined(with: .opacity))
+                .zIndex(1)
             }
         }
-        
-        return result
+        .onAppear {
+            viewModel.loadCompletedDates()
+            viewModel.calculateStreak()
+            
+            // إظهار الـ Pop-up إذا فيه streak
+            if viewModel.currentStreak >= 3 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    withAnimation(.spring()) {
+                        showStreakPopup = true
+                    }
+                }
+            }
+        }
     }
-}
-
-struct DayInfo: Hashable {
-    let day: Int
-    let isToday: Bool
-    let isPast: Bool
-    let isFuture: Bool
 }
 
 struct DayCell: View {
@@ -158,6 +178,8 @@ struct DayCell: View {
     let isToday: Bool
     let isPast: Bool
     let isFuture: Bool
+    let isCompleted: Bool
+    let isPartOfStreak: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -181,13 +203,19 @@ struct DayCell: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 28, height: 28)
-                    .opacity(0.6)
+                    .opacity(isCompleted ? 0.6 : 0.6)
             }
         }
         .frame(height: 77)
         .frame(maxWidth: .infinity)
         .background(isToday ? Color.yellow.opacity(0.2) : Color.white.opacity(0.7))
         .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(isPartOfStreak ? Color.yellow : Color.clear, lineWidth: 3)
+        )
+        .scaleEffect(isToday ? 1.1 : 1.0)
+        .shadow(color: isToday ? Color.orange.opacity(0.4) : Color.clear, radius: 8, y: 4)
     }
 }
 

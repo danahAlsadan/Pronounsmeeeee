@@ -1,22 +1,15 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    @State private var childName: String = ""
-    @State private var selectedGender: Gender? = nil
+    @StateObject private var viewModel = OnboardingViewModel()
     
     private let accentColor = Color(hex: "#EE822B")
-    @State private var navigateToHome: Bool = false
-
-    private var canProceed: Bool {
-        !childName.trimmingCharacters(in: .whitespaces).isEmpty &&
-        selectedGender != nil
-    }
+    
     var onFinish: (() -> Void)? = nil
     
     var body: some View {
         NavigationStack {
             ZStack {
-                // الخلفية
                 Image("SplashBackRound")
                     .resizable()
                     .scaledToFill()
@@ -24,42 +17,34 @@ struct OnboardingView: View {
                 
                 VStack(spacing: 20) {
                     
-                    // MARK: - Hello + Name (الاسم تحت Hello)
                     VStack(spacing: 8) {
-                        
-                        // Hello فوق
                         Text("Hello")
                             .font(.system(size: 40, weight: .bold))
                             .italic()
                             .foregroundColor(accentColor)
                             .frame(maxWidth: .infinity, alignment: .center)
                         
-                        // الاسم تحت Hello
-                        TextField("", text: $childName)
+                        TextField("", text: $viewModel.childName, prompt: Text("أدخل الاسم")
+                            .font(.system(size: 30, weight: .semibold))
+                            .italic()
+                            .foregroundColor(accentColor.opacity(0.4))
+                        )
                             .font(.system(size: 35, weight: .semibold))
                             .italic()
                             .foregroundColor(accentColor.opacity(0.85))
                             .multilineTextAlignment(.center)
-                            .placeholder(when: childName.isEmpty) {
-                                Text("Name")
-                                    .font(.system(size: 40, weight: .semibold))
-                                    .italic()
-                                    .foregroundColor(accentColor.opacity(0.50))
-                            }
-                            .frame(maxWidth: 115) // عرض معقول تحت Hello
+                            .frame(maxWidth: 200)
                             .frame(maxWidth: .infinity, alignment: .center)
                         
-                        // الخط تحت الاسم
                         Rectangle()
                             .fill(accentColor.opacity(0.4))
                             .frame(width: 150, height: 3)
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
-                    .padding(.top, 180)   // نزّلت الهيدر شوي تحت
+                    .padding(.top, 180)
                     
                     Spacer().frame(height: 1)
                     
-                    // MARK: - Boy / Girl
                     HStack(spacing: 20) {
                         genderColumn(type: .boy)
                         genderColumn(type: .girl)
@@ -68,13 +53,11 @@ struct OnboardingView: View {
                     
                     Spacer()
                     
-                    // MARK: - زر "بدأ"
-                    if canProceed {
+                    if viewModel.canProceed {
                         Button {
-                            saveUserData()
-                            UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
+                            viewModel.saveUserData()
                             onFinish?()
-                            navigateToHome = true
+                            viewModel.navigateToHome = true
                         } label: {
                             Text("بدأ")
                                 .font(.system(size: 26, weight: .bold))
@@ -96,74 +79,47 @@ struct OnboardingView: View {
                 }
                 .padding(.horizontal, 24)
             }
-            .navigationDestination(isPresented: $navigateToHome) {
+            .navigationDestination(isPresented: $viewModel.navigateToHome) {
                 HomePage(
-                    childName: childName,
-                    profileImage: selectedGender == .boy ? "Boy" : "Girl"
+                    childName: viewModel.childName,
+                    profileImage: viewModel.selectedGender == .boy ? "Boy" : "Girl"
                 )
             }
             .navigationBarBackButtonHidden(true)
         }
-        // الكيبورد ما يرفع المحتوى من تحت
         .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
-    // حفظ البيانات
-    private func saveUserData() {
-        UserDefaults.standard.set(childName, forKey: "childName")
-        UserDefaults.standard.set(selectedGender == .boy ? "Boy" : "Girl",
-                                  forKey: "profileImage")
-    }
-    
-    // MARK: - عمود ولد/بنت
     private func genderColumn(type: Gender) -> some View {
-        let isSelected = selectedGender == type
+        let isSelected = viewModel.selectedGender == type
         
         return VStack(spacing: 5) {
             Image(type == .boy ? "Boy" : "Girl")
                 .resizable()
                 .scaledToFit()
                 .frame(height: 180)
+                .opacity(isSelected || viewModel.selectedGender == nil ? 1.0 : 0.5)
             
             Button {
-                selectedGender = type
+                viewModel.selectGender(type)
             } label: {
                 ZStack {
                     Image("Star")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 150, height: 140)
-                        .scaleEffect(isSelected ? 1.08 : 1.0)
-                        .shadow(color: isSelected ? accentColor.opacity(0.4) : .clear,
-                                radius: 8, y: 4)
+                        .scaleEffect(isSelected ? 1.15 : 1.0)
+                        .colorMultiply(isSelected ? Color.yellow : Color.gray.opacity(0.6))
+                        .shadow(color: isSelected ? Color.yellow.opacity(0.6) : .clear,
+                                radius: 12, y: 6)
                     
                     Text(type == .boy ? "ولد" : "بنت")
                         .font(.system(size: 30, weight: .bold))
-                        .foregroundColor(accentColor)
+                        .foregroundColor(isSelected ? accentColor : Color.gray.opacity(0.7))
                 }
             }
             .buttonStyle(.plain)
-            .animation(.easeInOut(duration: 0.2), value: selectedGender)
-        }
-    }
-}
-
-// Gender enum
-enum Gender {
-    case boy
-    case girl
-}
-
-// Placeholder modifier
-extension View {
-    func placeholder<Content: View>(
-        when shouldShow: Bool,
-        alignment: Alignment = .leading,
-        @ViewBuilder placeholder: () -> Content
-    ) -> some View {
-        ZStack(alignment: alignment) {
-            if shouldShow { placeholder() }
-            self
+            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: viewModel.selectedGender)
         }
     }
 }
