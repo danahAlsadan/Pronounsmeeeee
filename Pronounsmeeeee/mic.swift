@@ -205,33 +205,33 @@ struct RecorderView: View {
     
     //  تسجيل الصوت
     func toggleRecording() {
-        isRecording.toggle()
-
         if isRecording {
-            startRecording()
+            // المستخدم ضغط لإيقاف المايك يدويًا
+            stopRecording()
+        } else {
+            // المستخدم ضغط لبدء التسجيل
+            recognizer.start()
+            resultMessage = ""
+            showNextButton = false
+            isRecording = true
 
-            // إيقاف تلقائي بعد 5 ثواني فقط إذا ما انقفل
+            // إيقاف تلقائي بعد 5 ثواني إذا المستخدم ما أوقف المايك
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 if isRecording {
                     stopRecording()
                 }
             }
 
-        } else {
-            stopRecording()
         }
     }
 
-    
-    func startRecording() {
-        // شغّل المايك
+    func stopRecording() {
+        if !isRecording { return } // حماية من التوقف المكرر
+        isRecording = false
+        recognizer.stop()
+        checkWord() // قارن الكلمة بعد الإيقاف
     }
 
-    func stopRecording() {
-        isRecording = false
-        // أوقف المايك
-    }
- 
     
     // التحقق من الكلمة
 //    func checkWord() {
