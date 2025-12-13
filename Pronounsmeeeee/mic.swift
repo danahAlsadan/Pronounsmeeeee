@@ -7,6 +7,7 @@ struct RecorderView: View {
     @AppStorage("selectedLetter") private var selectedLetter: String = ""
 
     @State private var goToStory = false
+    @State private var goToHomepage = false
 
     @State var sentences: [String]
 
@@ -25,6 +26,13 @@ struct RecorderView: View {
     @State private var resultMessage = ""
     @State private var showNextButton = false
 
+    // Read saved child info for HomePage navigation
+    private var storedChildName: String {
+        UserDefaults.standard.string(forKey: "childName") ?? ""
+    }
+    private var storedProfileImage: String {
+        UserDefaults.standard.string(forKey: "profileImage") ?? "Boy"
+    }
     
     // تقدم الجمل في هذه الجلسة
     private var completedSentences: Int { currentIndex }
@@ -41,6 +49,40 @@ struct RecorderView: View {
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
+            
+            VStack {
+                 Spacer().frame(height: 100) // نفس المسافة في صفحة الفيديو
+                 HStack {
+                     Spacer() // يدفع الزر لليمين
+                     Button(action: {
+                         goToHomepage = true
+                     }) {
+                         Image(systemName: "house")
+                             .foregroundColor(Color(hex: "f6b922"))
+                             .font(.title)
+                             .frame(width: 60, height: 60)
+                             .background(
+                                 RoundedRectangle(cornerRadius: 16)
+                                     .fill(Color.white.opacity(0.6))
+                             )
+                     }
+                     .padding(.top, -110)
+                     .padding(.trailing, 50)
+                 }
+                 Spacer()
+             }
+
+             NavigationLink(
+                 destination: HomePage(
+                     childName: storedChildName,
+                     profileImage: storedProfileImage
+                 ),
+                 isActive: $goToHomepage
+             ) {
+                 EmptyView()
+             }
+            
+            
             
             NavigationLink(
                 destination: AnimalQuizView(letter: selectedLetter), // هنا نمرر الحرف المختار

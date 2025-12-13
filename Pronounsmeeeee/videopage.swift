@@ -5,7 +5,6 @@
 //  Created by danah alsadan on 13/06/1447 AH.
 //
 
-
 import SwiftUI
 
 // MARK: - Video Page
@@ -25,6 +24,15 @@ struct LetterVideoScreen: View {
     let letters: [String]
     let videoID: String
     let sentences: [String]
+    @State private var goToHomepage  = false
+
+    // Read saved child info from UserDefaults for HomePage
+    private var storedChildName: String {
+        UserDefaults.standard.string(forKey: "childName") ?? ""
+    }
+    private var storedProfileImage: String {
+        UserDefaults.standard.string(forKey: "profileImage") ?? "Boy"
+    }
 
     var body: some View {
         
@@ -44,6 +52,34 @@ struct LetterVideoScreen: View {
             VStack {
                 Spacer().frame(height: 140)
                 
+                HStack {
+                       Spacer() // هذا يدفع الزر لليمين
+                       Button(action: {
+                           goToHomepage = true
+                       }) {
+                           Image(systemName: "house")
+                               .foregroundColor(Color(hex: "f6b922"))
+                               .font(.title)
+                               .frame(width: 60, height: 60) // match the rectangle size
+                                         .background(
+                                             RoundedRectangle(cornerRadius: 16)
+                                                 .fill(Color.white.opacity(0.6))
+                                         )
+                       }
+                       .padding(.top, -110)
+                       .padding(.trailing, 50)
+                   }
+                   Spacer()
+                
+                NavigationLink(
+                    destination: HomePage(
+                        childName: storedChildName,
+                        profileImage: storedProfileImage
+                    ),
+                    isActive: $goToHomepage
+                ) {
+                    EmptyView()
+                }
                 // الحروف بالحركات
                 HStack(spacing: 55) {
                     ForEach(letters, id: \.self) { letter in
@@ -102,22 +138,13 @@ struct LetterVideoScreen: View {
                     Text("التمارين")
                         .font(.title2)
                         .foregroundColor(.white)
-//                        .padding()
-//                        .frame(width: 220)
-//                        .background(Color(hex: "f6b922"))
-//                        .cornerRadius(20)
                         .offset(y: -10)
-
-                    
-                  
                     
                     Image(systemName: "arrowshape.right.fill")
-                                .foregroundColor(.white)
-                                .font(.title3)
-                                .offset(y: -10)
-
+                        .foregroundColor(.white)
+                        .font(.title3)
+                        .offset(y: -10)
                 }
-                
                 .padding(.top, 20)
                 .buttonStyle(.plain)
                 .shadow(radius: 2)
@@ -127,7 +154,7 @@ struct LetterVideoScreen: View {
                 .cornerRadius(20)
             }
             .padding(.top, 500)
-////
+            ////
         }
         .navigationBarBackButtonHidden(true)
     }

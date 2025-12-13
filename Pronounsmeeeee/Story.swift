@@ -246,6 +246,7 @@ struct AnimalQuizView: View {
     @State private var selectedOption: String? = nil
     @State private var showCorrectAlert = false
     @State private var goToJar = false
+    @State private var goToHomepage = false
 
     init(letter: String = "أ") {
         self.letter = letter
@@ -275,6 +276,41 @@ struct AnimalQuizView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .ignoresSafeArea()
 
+            VStack {
+                Spacer().frame(height: 100) // نفس المسافة مثل صفحات الفيديو والتسجيل
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        goToHomepage = true
+                    }) {
+                        Image(systemName: "house")
+                            .foregroundColor(Color(hex: "f6b922"))
+                            .font(.title)
+                            .frame(width: 60, height: 60)
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color.white.opacity(0.6))
+                            )
+                    }
+                    .padding(.top, -110)
+                    .padding(.trailing, 340)
+                }
+                Spacer()
+            }
+
+            NavigationLink(
+                destination: HomePage(
+                    childName: UserDefaults.standard.string(forKey: "childName") ?? "",
+                    profileImage: UserDefaults.standard.string(forKey: "profileImage") ?? "Boy"
+                ),
+                isActive: $goToHomepage
+            ) {
+                EmptyView()
+            }
+
+            
+            
+            
             VStack(spacing: 0) {
 
                 // NavigationLink مخفي للانتقال للبرطمان

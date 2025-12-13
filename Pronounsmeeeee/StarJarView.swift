@@ -45,6 +45,8 @@ struct StarJarView: View {
                     .font(.title2)
                     .bold()
                     .padding(.top, 40)
+                    .foregroundColor(.black)
+
 
                 Spacer()
 
@@ -64,7 +66,8 @@ struct StarJarView: View {
                 .background(
                     // Liquid Glass background
                     RoundedRectangle(cornerRadius: 100, style: .continuous)
-                        .fill(.ultraThinMaterial)
+//                        .fill(.ultraThinMaterial)
+                        .fill(Color.white.opacity(0.95))
                         .overlay(
                             // لمعة/حد خفيف يعطي إحساس الزجاج
                             RoundedRectangle(cornerRadius: 1000, style: .continuous)
