@@ -24,6 +24,7 @@ struct RecorderView: View {
     
     @State private var resultMessage = ""
     @State private var showNextButton = false
+
     
     // تقدم الجمل في هذه الجلسة
     private var completedSentences: Int { currentIndex }
@@ -198,23 +199,39 @@ struct RecorderView: View {
             
 //            ConfettiCannon(trigger: $confettiCounter)
         }
+        .navigationBarBackButtonHidden(true)
+        
     }
     
     //  تسجيل الصوت
     func toggleRecording() {
-        if isRecording {
-            recognizer.stop()
-//            checkWord()
+        isRecording.toggle()
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-                checkWord()
+        if isRecording {
+            startRecording()
+
+            // إيقاف تلقائي بعد 5 ثواني فقط إذا ما انقفل
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                if isRecording {
+                    stopRecording()
+                }
             }
 
         } else {
-            recognizer.start()
+            stopRecording()
         }
-        isRecording.toggle()
     }
+
+    
+    func startRecording() {
+        // شغّل المايك
+    }
+
+    func stopRecording() {
+        isRecording = false
+        // أوقف المايك
+    }
+ 
     
     // التحقق من الكلمة
 //    func checkWord() {

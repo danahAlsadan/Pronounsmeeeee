@@ -339,6 +339,7 @@ struct AnimalQuizView: View {
                 .shadow(color: .black.opacity(0.18), radius: 10, x: 0, y: 8)
                 .shadow(color: .white.opacity(0.2), radius: 2, x: -1, y: -1)
                 .padding(.horizontal, 30)
+                .navigationBarBackButtonHidden(true)
 
                 // أزرار الخيارات
                 HStack(spacing: 12) {

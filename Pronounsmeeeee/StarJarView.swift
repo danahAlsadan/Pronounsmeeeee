@@ -114,6 +114,7 @@ struct StarJarView: View {
                     .offset(x: fallOffset.width, y: fallOffset.height)
             }
         }
+        .navigationBarBackButtonHidden(true)
         .onAppear {
             // نجمة واحدة فقط في اليوم + الحد الأقصى
             if justEarnedStar, canAddStarToday(), starCount < maxStars {
