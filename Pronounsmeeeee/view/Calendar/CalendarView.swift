@@ -11,7 +11,7 @@ struct CalendarView: View {
     
     var onDismiss: () -> Void = {}
     
-    private let weekdays = ["سبت", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    private let weekdays = ["أحد", "أثنين", "ثلاثاء", "اربعاء", "خميس", "جمعة", "سبت"]
     
     var body: some View {
         ZStack {

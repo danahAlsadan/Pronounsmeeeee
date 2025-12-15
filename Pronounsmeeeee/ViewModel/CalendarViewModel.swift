@@ -18,12 +18,21 @@ final class CalendarViewModel: ObservableObject {
     private let completedDatesKey = "completedDatesKey"
     
     let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-
+    private let arabicMonths = [
+        "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+        "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+    ]
+//    func getMonthYear() -> String {
+//        let formatter = DateFormatter()
+//        formatter.locale = Locale(identifier: "en_US")
+//        formatter.dateFormat = "MMMM yyyy"
+//        return formatter.string(from: currentMonth)
+//    }
     func getMonthYear() -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US")
-        formatter.dateFormat = "MMMM yyyy"
-        return formatter.string(from: currentMonth)
+        let calendar = Calendar.current
+        let monthIndex = calendar.component(.month, from: currentMonth) - 1
+        let year = calendar.component(.year, from: currentMonth)
+        return "\(arabicMonths[monthIndex]) \(year)"
     }
 
     func moveMonth(by value: Int) {
