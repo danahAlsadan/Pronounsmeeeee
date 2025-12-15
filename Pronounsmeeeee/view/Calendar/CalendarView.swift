@@ -128,7 +128,7 @@ struct CalendarView: View {
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.gray)
                             .padding(.bottom, 5)
-                        
+          //
                         Button {
                             withAnimation {
                                 showStreakPopup = false
