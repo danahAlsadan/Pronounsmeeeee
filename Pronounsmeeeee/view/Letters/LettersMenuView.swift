@@ -265,10 +265,10 @@ struct MenuView: View {
         ),
         // التاء
         "ت": StoryItem(
-            storyLine: "ذهب احمد الى الحديقة ورأى",
+            storyLine: "لبست الاميرة الـ",
             options: ["خروف", "تمساح", "أرنب"],
-            correctOption: "تمساح",
-            imageName: "تمساح"
+            correctOption: "تاج",
+            imageName: "تاج"
         ),
         // الثاء
         "ث": StoryItem(
