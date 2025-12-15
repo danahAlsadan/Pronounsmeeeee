@@ -10,6 +10,8 @@ struct StarJarView: View {
     let justEarnedStar: Bool          // لو true يعني الطفل توه كاسب نجمة
     @State private var goToHomepage  = false
 
+    @EnvironmentObject var calendarVM: CalendarViewModel
+
     // عدد النجوم المخزّنة (ينحفظ في UserDefaults تلقائيًا)
     @AppStorage("starCount") private var starCount: Int = 0
     // تاريخ آخر مرة أضفنا فيها نجمة (مفتاح نصي لليوم)
@@ -95,6 +97,7 @@ struct StarJarView: View {
                 .navigationBarBackButtonHidden(true)
 
                 Button(action: {
+                    calendarVM.markTodayAsCompleted()
                     goToHomepage = true
                 }) {
                     Text("أحسنت")

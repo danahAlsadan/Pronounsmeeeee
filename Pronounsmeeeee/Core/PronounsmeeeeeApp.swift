@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct PronounsmeeeeeApp: App {
+    @StateObject var calendarVM = CalendarViewModel()
     var body: some Scene {
         WindowGroup {
             RootView()   //RootView
         }
+        .environmentObject(calendarVM)
+
     }
 }
 /// dont  put any thing here plz
